@@ -13,6 +13,12 @@ const userSchema = new mongoose.Schema({
         unique:[true,'A account with this email id already exist'],
         validate:[validator.isEmail,'Please provide a valid email id']
     },
+    phone:{
+        type:String,
+        required:[true,'Please provide your phone number'],
+        validate:validator.isNumeric,
+        trim:true
+    },
     password:{
         type:String,
         required:[true,'Please provide a password'],

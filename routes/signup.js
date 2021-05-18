@@ -11,23 +11,24 @@ router.get('/signup',(req,res)=>{
 
 router.post('/signup',(req,res)=>{
     console.log(req.body)
-    const {name,email,password,profilePic,city} = req.body
-    if(!email || !password || !name){
+    const {name,email,password,profilePic,city,phone} = req.body
+    if(!email || !password || !name || !phone){
         return res.status(422).json({error:"Please fill up all the required fields"})
     }
-    User.findOne({email:email})
+    User.findOne({$or:[{email:email},{phone:phone}]})
     .then((savedUser)=>{
         if(savedUser){
-            return res.status(422).json({error:"User already exists with this email."})
+            return res.status(422).json({error:"User already exists with this email or phone number."})
         }
         bcrypt.hash(password,12)
         .then(hashedPass=>{
             const user = new User({
-                email:email,
-                name:name,
+                email,
+                name,
                 password:hashedPass,
                 city,
-                profilePic
+                profilePic,
+                phone
             })
             user.save()
             .then(user=>{
