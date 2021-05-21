@@ -16,13 +16,13 @@ const userSchema = new mongoose.Schema({
     phone:{
         type:String,
         required:[true,'Please provide your phone number'],
-        validate:validator.isNumeric,
+        //validate:validator.isNumeric,
         trim:true
     },
     password:{
         type:String,
         required:[true,'Please provide a password'],
-        select:false
+        //select:false
     },
     city:{
         type:String,

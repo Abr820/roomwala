@@ -10,7 +10,7 @@ router.get('/signup',(req,res)=>{
 })
 
 router.post('/signup',(req,res)=>{
-    console.log(req.body)
+    //console.log(req.body)
     const {name,email,password,profilePic,city,phone} = req.body
     if(!email || !password || !name || !phone){
         return res.status(422).json({error:"Please fill up all the required fields"})
