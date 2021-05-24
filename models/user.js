@@ -16,13 +16,14 @@ const userSchema = new mongoose.Schema({
     phone:{
         type:String,
         required:[true,'Please provide your phone number'],
-        //validate:validator.isNumeric,
+        unique:[true,'A account with this phone number already exist'],
+        validate:validator.isNumeric,
         trim:true
     },
     password:{
         type:String,
         required:[true,'Please provide a password'],
-        //select:false
+        select:false
     },
     city:{
         type:String,
