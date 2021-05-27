@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 const User = mongoose.model("User")
 const bcrypt = require('bcryptjs')
+const jwt = require("jsonwebtoken")
+const {JWT_SECRET} = require("../src/keys")
 
 
 const login = (req,res,next)=>{
@@ -18,7 +20,10 @@ const login = (req,res,next)=>{
         bcrypt.compare(password,savedUser.password)
         .then((doMatch)=>{
             if(doMatch){
-                res.json({message:"successfully signed in."})
+                //res.json({message:"successfully signed in."})
+                //console.log(JWT_SECRET)
+                const token = jwt.sign({_id:savedUser._id},JWT_SECRET)
+                res.json({token:token})
             }
             else{
                 return res.status(422).json({error:"Invalid user id or password."})

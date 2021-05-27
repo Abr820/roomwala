@@ -4,9 +4,14 @@ const mongoose = require('mongoose')
 const User = mongoose.model("User")
 const bcrypt = require('bcryptjs')
 const auth  = require("../auths/signupAuth")
+const requiredlogin = require("../auths/requiredLogin")
 
 router.get('/signup',(req,res)=>{
     res.send('This is signup page')
+})
+
+router.get('/protected',requiredlogin,(req,res)=>{
+    res.json({message:"sucessfully accessed protected data"})
 })
 
 router.post('/signup',auth,(req,res)=>{
