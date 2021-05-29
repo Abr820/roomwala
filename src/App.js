@@ -28,6 +28,7 @@ const middleWare = (req,res,next)=>{
 App.use(express.json())
 App.use(require('../routes/signup'))
 App.use(require('../routes/login'))
+App.use(require('../routes/myprofile'))
 
 App.get('/',middleWare,(req,res)=>{
   res.send("hello world")

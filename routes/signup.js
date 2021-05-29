@@ -10,10 +10,6 @@ router.get('/signup',(req,res)=>{
     res.send('This is signup page')
 })
 
-router.get('/protected',requiredlogin,(req,res)=>{
-    res.json({message:"sucessfully accessed protected data"})
-})
-
 router.post('/signup',auth,(req,res)=>{
     //console.log(req.body)
     const {name,email,password,profilePic,city,phone} = req.body

@@ -32,6 +32,18 @@ const userSchema = new mongoose.Schema({
     profilePic:{
         type:String,
         default:'path to default profile pic'
+    },
+    age:{
+        type:Number,
+        default:-1
+    },
+    profession:{
+        type:String,
+        default:''
+    },
+    about:{
+        type:String,
+        default:''
     }
 })
 
