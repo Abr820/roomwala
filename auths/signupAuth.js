@@ -5,7 +5,7 @@ const validator = require('validator')
 
 const signup = (req,res,next)=>{
     //console.log(req.body,"signup auth executed")
-    const {name,email,password,profilePic,city,phone} = req.body
+    const {name,email,phone,password} = req.body
     if(!email || !phone || !password || !name){
         return res.status(422).json({error:"Please fill up all the required fields"})
     }
@@ -21,11 +21,12 @@ const signup = (req,res,next)=>{
         if(savedUser){
             return res.status(422).json({error:"User already exists with this email or phone number."})
         }
+        next()
     })
     .catch(err=>{
         console.log("error in finding user:",err)
     })
-    next()
+    
   }
 
   module.exports = signup

@@ -12,15 +12,13 @@ router.get('/signup',(req,res)=>{
 
 router.post('/signup',auth,(req,res)=>{
     //console.log(req.body)
-    const {name,email,password,profilePic,city,phone} = req.body
+    const {name,email,phone,password} = req.body
     bcrypt.hash(password,12)
     .then(hashedPass=>{
         const user = new User({
             email,
             name,
             password:hashedPass,
-            city,
-            profilePic,
             phone
         })
         user.save()

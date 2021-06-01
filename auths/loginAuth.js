@@ -14,7 +14,7 @@ const login = (req,res,next)=>{
     User.findOne({$or:[{email:user_id},{phone:user_id}]}).select('password')
     .then((savedUser)=>{
         if(!savedUser){
-            return res.status(422).json({error:"Invalid user id or password."})
+            return res.status(422).json({error:"User does not exist"})
         }
         //console.log(savedUser)
         bcrypt.compare(password,savedUser.password)
@@ -22,18 +22,22 @@ const login = (req,res,next)=>{
             if(doMatch){
                 //res.json({message:"successfully signed in."})
                 //console.log(JWT_SECRET)
-                const token = jwt.sign({_id:savedUser._id},JWT_SECRET)
-                res.json({token:token})
+                // const token = jwt.sign({_id:savedUser._id},JWT_SECRET)
+                // res.json({token:token})
+                const token = jwt.sign({_id : savedUser._id},JWT_SECRET)
+                const {_id,name,email} = savedUser
+                res.json({token,user:{_id,name,email}})
             }
             else{
                 return res.status(422).json({error:"Invalid user id or password."})
             }
+            next()
         })
         .catch(err=>{
             console.log("error in login:",err)
         })
     })
-    next()
+    
   }
 
   module.exports = login

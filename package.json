@@ -9,7 +9,7 @@
     "bcryptjs": "^2.4.3",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.12.9",
+    "mongoose": "^5.12.12",
     "nodemon": "^2.0.7",
     "postman": "^0.2.0",
     "react": "^17.0.2",
@@ -44,7 +44,10 @@
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "App.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.14.3",
+    "typescript": "^4.3.2"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Abr820/roomwala.git"

@@ -1,7 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const App = express()
-const PORT = 3000
+const PORT = 5000
 const {MONGOURI} = require('./keys')
 
 require('../models/user')
@@ -12,6 +12,10 @@ mongoose.connect(MONGOURI,{
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
+
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
+
 mongoose.connection.on('connected',()=>{
   console.log("database connected successfully")
 })
