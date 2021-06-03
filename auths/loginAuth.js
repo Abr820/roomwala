@@ -14,7 +14,7 @@ const login = (req,res,next)=>{
     User.findOne({$or:[{email:user_id},{phone:user_id}]}).select('password')
     .then((savedUser)=>{
         if(!savedUser){
-            return res.status(422).json({error:"User does not exist"})
+            return res.status(422).json({error:"Invalid user id or password."})
         }
         //console.log(savedUser)
         bcrypt.compare(password,savedUser.password)

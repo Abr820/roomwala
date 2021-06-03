@@ -31,7 +31,7 @@ router.put('/myprofile',requiredlogin,(req,res)=>{
             return res.status(422).json({error:err})
         }
         else{
-            console.log(result)
+            //console.log(result)
             res.json(result)
         }
     })

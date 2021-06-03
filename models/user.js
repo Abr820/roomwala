@@ -44,6 +44,21 @@ const userSchema = new mongoose.Schema({
     about:{
         type:String,
         default:''
+    },
+    gender:{
+        type:String,
+        enum:{
+            values:['male','female','others'],
+            message:'Please, select between MALE or FEMALE or OTHERS',
+        }
+        
+    },
+    maritial_status:{
+        type:String,
+        enum: {
+            values:['bachelor','married'],
+            message: 'Please, select between BACHELOR or MARRIED'
+        }   
     }
 })
 
