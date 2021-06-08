@@ -9,9 +9,9 @@ const NavBar = () => {
       if(state){
         return (
           [
-            <li key={3}><Link to="/profile">Profile</Link></li>,
-            <li key={4}><Link to="/">Home</Link></li>,
-            <li key={5}><Link to="/">Listing</Link></li>,
+            <li key={3}><Link to="/">Home</Link></li>,
+            <li key={4}><Link to="/profile">Profile</Link></li>,
+            <li key={5}><Link to="/add">Add Room</Link></li>,
             <li key={6}>
             <button className="btn #7e57c2 deep-purple lighten-1" onClick={()=>{
               localStorage.clear()
