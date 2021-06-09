@@ -7,10 +7,7 @@ import Profile from "./components/screens/Profile"
 import SignIn from "./components/screens/Signin"
 import SignUp from "./components/screens/Signup"
 import AddRoom from "./components/screens/AddRoom"
-//import CreatePost from "./components/screens/createPost"
 import {reducer,initialState} from "./reducer/userReducers"
-//import EditProfile from "./components/screens/editProfile"
-//import EditDetails from "./components/screens/details"
 
 
 export const UserContext = createContext()
