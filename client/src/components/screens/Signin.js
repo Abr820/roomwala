@@ -7,6 +7,7 @@ import "../../App.css"
 const SignIn = () => {
     useEffect(() => { 
         let link = document.createElement('link');
+        // css file in public folder
         link.href = "signIn.css";
         link.rel = "stylesheet";
         link.type = "text/css";
