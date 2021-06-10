@@ -7,7 +7,15 @@ const requiredlogin = require("../auths/requiredLogin")
 
 router.get('/myprofile',requiredlogin,(req,res)=>{
     //res.send('This is myprofile page')
-    res.json(req.user)  // user data send to fill up the required places
+    // res.json(req.user)  // user data send to fill up the required places
+    User.findById({_id:req.user._id})
+        .then(myProfile => {
+            console.log(myProfile);
+            res.json(myProfile)
+        })
+        .catch(err => {
+            console.log(err);
+        })
 })
 
 router.put('/myprofile',requiredlogin,(req,res)=>{
