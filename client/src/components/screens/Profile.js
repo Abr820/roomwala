@@ -1,23 +1,27 @@
 import React,{useContext,useEffect, useState} from "react"
 import { Link,useHistory } from "react-router-dom"
 import {UserContext} from "../../App"
+import { useForm } from 'react-hook-form'
+import M from "materialize-css"
 import "../../App.css"
 
 const Profile = () => {
     const [data,setData] = useState([])
     const {state,dispatch} = useContext(UserContext)
     const history = useHistory()
+    const {handleSubmit} = useForm()
 
     const [age,setAge] = useState("")
     const [city,setCity] = useState("")
     const [profession,setProfession] = useState("")
     const [gender,setGender] = useState("")
-    const [marital_status,setStatus] = useState("")
+    const [maritalStatus,setStatus] = useState("")
     const [about,setAbout] = useState("")
     const [profilePic,setProfilePic] = useState("")
+    var postData = {}
 
     useEffect(() => {
-      fetch("/myProfile",{
+      fetch("/myprofile",{
           headers:{
               "Authorization":"Bearer "+localStorage.getItem("jwt")
           }
@@ -30,6 +34,49 @@ const Profile = () => {
           })
   },[])
 
+  const submit = (e) => {
+    if(age !== "") postData = {...postData, "age": age}
+    if(city !== "") postData = {...postData, "city": city}
+    if(profession !== "") postData = {...postData, "profession": profession}
+    if(gender !== "") postData = {...postData, "gender": gender}
+    if(maritalStatus !== "") postData = {...postData, "maritalStatus": maritalStatus}
+    if(about !== "") postData = {...postData, "about": about}
+    //if(about !== "") postData = {...postData, "about": about}
+
+    Object.entries(postData).forEach(([key,value]) => {
+      console.log(key , value);
+    })
+
+    fetch("/updateMe",{
+      method: "patch",
+      headers:{
+        "Content-Type":"application/json",
+        "Authorization":"Bearer "+localStorage.getItem("jwt")
+      },
+      //redirect:true,
+      body:JSON.stringify(postData)
+    })
+    .then(res => {
+      console.log(res)
+      //res.json()
+    })
+      .then(result => {
+        console.log(result);
+        // if(result.error){
+        //   M.toast({html: "Something went wrong", classes:"#d32f2f red darken-2"})
+        // }
+        // else{
+        //   setData(result)
+        //   M.toast({html: "Updated successfully" , classes:"#43a047 green darken-1"})
+        //   history.push("/profile")
+        // }
+      })
+      .catch(err => {
+        console.log("Error1:",err)
+      })
+
+  }
+
   return (
     <div style={{maxWidth:"1200px" , margin:"0px auto"}}>
     {/* picture on left */}
@@ -40,8 +87,8 @@ const Profile = () => {
         />
       </div>
 
+      <form onSubmit={handleSubmit(submit)}>
       <div>
-        <label className="" for="profileId">Update Profile Image</label>
         <input
           id="profileId"
           type="file"
@@ -53,9 +100,9 @@ const Profile = () => {
       {/* details on right */}
       <div>
         <div>
-          <label className="" for="nameid">Name</label>
+          <label className="" for="nameId">Name</label>
           <input
-            id="nameid"
+            id="nameId"
             placeholder={data.name}
             name="name"
             readOnly
@@ -144,11 +191,19 @@ const Profile = () => {
             type="text"
             name="about"
             placeholder={data.about}
-            value={data.about}
+            value={about}
             onChange={(e) => setAbout(e.target.value)}
           />
         </div>
+
+        <div>
+        <input
+          type="submit"
+        />
+        </div>
+
       </div>
+      </form>
     </div>
   )
 }
