@@ -8,7 +8,8 @@ const roomSchema = new mongoose.Schema({
         enum:{
             values:['private','shared'],
             message: 'Please, select between PRIVATE or SHARED'
-        }
+        },
+        default:'private'
     },
     mainPic:{
         type:String,
@@ -26,6 +27,7 @@ const roomSchema = new mongoose.Schema({
     },
     city:{
         type:String,
+        required:[true, 'Please provide city.'],
         default:''
     },
     state:{
@@ -49,6 +51,7 @@ const roomSchema = new mongoose.Schema({
     rent:{
         type:Number,
         required:[true,'rent per month must be mentioned'],
+        validate:validator.isNumeric
     },
     createDate:{
         type: Date,

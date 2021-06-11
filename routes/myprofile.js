@@ -53,35 +53,7 @@ router.patch('/updateMe',requiredlogin,(req,res)=>{
         res.status(500).send()
     })
    
-    
-    
-
 })
 
 
 module.exports = router
-
-//console.log(req.user)
-    // const {name,profilePic,city,age,about,profession} = req.body
-    // //console.log(req.body)
-    // User.findByIdAndUpdate(req.user._id,
-    //     {
-    //         name,
-    //         profilePic,
-    //         about,
-    //         profession,
-    //         city,
-    //         age
-    //     },
-    //     {
-    //         new:true
-    // })
-    // .exec((err,result)=>{
-    //     if(err){
-    //         return res.status(422).json({error:err})
-    //     }
-    //     else{
-    //         //console.log(result)
-    //         res.json(result)
-    //     }
-    // })

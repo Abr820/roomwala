@@ -17,9 +17,31 @@ const Profile = () => {
     const [gender,setGender] = useState("")
     const [maritalStatus,setStatus] = useState("")
     const [about,setAbout] = useState("")
+    const [image,setImage] = useState("")
     const [profilePic,setProfilePic] = useState("")
     var postData = {}
 
+    const postDetails = () =>{
+      const picData = new FormData()
+      picData.append("file",image)
+      picData.append("upload_preset","room-wala")
+      picData.append("cloud_name","roomwala")
+      fetch(" https://api.cloudinary.com/v1_1/roomwala/image/upload",{
+        method:"POST",
+        body:picData
+      })
+      .then(res=>res.json())
+      .then(result=>{
+          console.log(result.url)
+          setProfilePic(result.url)
+      })
+      .catch(err=>{
+        console.log(err)
+      })
+    }
+    
+    
+    
     useEffect(() => {
       fetch("/myprofile",{
           headers:{
@@ -45,6 +67,10 @@ const Profile = () => {
     if(gender !== "") postData = {...postData, "gender": gender}
     if(maritalStatus !== "") postData = {...postData, "maritalStatus": maritalStatus}
     if(about !== "") postData = {...postData, "about": about}
+    if(image !== "") {
+      postDetails()
+      postData = {...postData, "profilePic":profilePic}
+    }
     //if(about !== "") postData = {...postData, "about": about}
 
     // Object.entries(postData).forEach(([key,value]) => {
@@ -82,7 +108,8 @@ const Profile = () => {
       <div>
         <img
           style={{width:"160px",height:"160px",borderRadius:"80px"}}
-          src="https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659651__480.png"
+          src = {(data.profilePic == "") ? "https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659651__480.png" : data.profilePic}
+          //src="https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659651__480.png"
         />
       </div>
 
@@ -92,7 +119,7 @@ const Profile = () => {
           id="profileId"
           type="file"
           name="profilepic"
-          onChange={(e) => setProfilePic(e.target.value)}
+          onChange={(e) => setImage(e.target.files[0])}
         />
       </div>
 
