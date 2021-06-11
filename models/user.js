@@ -53,7 +53,7 @@ const userSchema = new mongoose.Schema({
         }
         
     },
-    maritial_status:{
+    maritalStatus:{
         type:String,
         enum: {
             values:['bachelor','married'],
