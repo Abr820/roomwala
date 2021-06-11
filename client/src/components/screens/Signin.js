@@ -5,19 +5,6 @@ import M from "materialize-css"
 import "../../App.css"
 
 const SignIn = () => {
-    useEffect(() => { 
-        let link = document.createElement('link');
-        // css file in public folder
-        link.href = "signIn.css";
-        link.rel = "stylesheet";
-        link.type = "text/css";
-        link.id = "sigInCss";
-        if(document.getElementById("sigInCss") == null) document.head.appendChild(link);
-        return () => {
-            // remove the applied css
-            document.head.removeChild(document.getElementById("sigInCss"));
-        } 
-    });
 
     const {state,dispatch} = useContext(UserContext)
     const history = useHistory()
