@@ -24,13 +24,14 @@ router.get('/myprofile',requiredlogin,(req,res)=>{
         })
         .catch(err => {
             console.log(err);
+            res.status(500).send()
         })
 })
 
 router.patch('/updateMe',requiredlogin,(req,res)=>{
     
 
-    console.log("Chinmaya",req.body);
+    //console.log("Chinmaya",req.body);
     const filterBody = filterObj (
         req.body,
         'age',
@@ -41,23 +42,19 @@ router.patch('/updateMe',requiredlogin,(req,res)=>{
         'gender',
         'maritalStatus'
     )
-    console.log(filterBody);
 
-    // const updatedUser = User.findByIdAndUpdate(req.user._id, filterBody, {
-    //     new: true,
-    //     runValidators: true,
-    // })
-    // .exec((err,result) => {
-    //     if(err){
-    //         return res.status(422).json({error:err})
-    //     }
-    //     else{
-    //         console.log({result});
-    //         res.status(200).json(result)
-    //     }
-    // })
-    // console.log(updatedUser);
-    res.status(200).json({ status: 'sucess', data: { } });
+     User.findByIdAndUpdate(req.user._id, filterBody, {
+        new: true,
+        runValidators: true,
+    })
+    .then((result) => res.status(200).send())
+    .catch((err) => {
+        console.log(err.message + "\n" + err)
+        res.status(500).send()
+    })
+   
+    
+    
 
 })
 

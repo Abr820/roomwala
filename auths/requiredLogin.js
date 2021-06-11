@@ -4,7 +4,6 @@ const mongoose = require("mongoose")
 const User = mongoose.model("User")
 
 module.exports = (req,res,next)=>{
-    console.log("chiranjib");
     const {authorization} = req.headers
     //authorization --> "Bearer <the token>"
     if(!authorization){

@@ -27,11 +27,15 @@ const Profile = () => {
           }
       })
       .then(res => res.json())
-          .then(result => {
-              //console.log(result)
-              setData(result)
-              history.push("/profile")
-          })
+      .then(result => {
+            //console.log(result)
+            setData(result)
+            history.push("/profile")
+      })
+      .catch(err => {
+          console.log(err)
+      })
+      return  () => {}
   },[])
 
   const submit = (e) => {
@@ -43,33 +47,28 @@ const Profile = () => {
     if(about !== "") postData = {...postData, "about": about}
     //if(about !== "") postData = {...postData, "about": about}
 
-    Object.entries(postData).forEach(([key,value]) => {
-      console.log(key , value);
-    })
+    // Object.entries(postData).forEach(([key,value]) => {
+    //   console.log(key , value);
+    // })
 
     fetch("/updateMe",{
-      method: "patch",
+      method: "PATCH",
       headers:{
         "Content-Type":"application/json",
         "Authorization":"Bearer "+localStorage.getItem("jwt")
       },
-      //redirect:true,
       body:JSON.stringify(postData)
     })
-    .then(res => {
-      console.log(res)
-      //res.json()
-    })
       .then(result => {
-        console.log(result);
-        // if(result.error){
-        //   M.toast({html: "Something went wrong", classes:"#d32f2f red darken-2"})
-        // }
-        // else{
-        //   setData(result)
-        //   M.toast({html: "Updated successfully" , classes:"#43a047 green darken-1"})
-        //   history.push("/profile")
-        // }
+        //console.log(typeof(result.status));
+        if(result.status===500){
+          M.toast({html: "Something went wrong", classes:"#d32f2f red darken-2"})
+        }
+        else{
+          M.toast({html: "Updated successfully" , classes:"#43a047 green darken-1"})
+          history.push("/profile")
+        }
+        
       })
       .catch(err => {
         console.log("Error1:",err)
@@ -158,18 +157,18 @@ const Profile = () => {
         <div>
           <label className="" for="genderId">Gender</label>
           <select className="browser-default" id="genderId" name="gender" onChange={(e) => setGender(e.target.value)}>
-              <option selected="selected">Select your Gender</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
+              <option selected="selected">{(data.gender==="") ? "Select your gender":data.gender}</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
           </select>
         </div>
 
         <div>
           <label for="statusId">Marital Status</label>
           <select className="browser-default" id="statusId" name="status" onChange={(e) => setStatus(e.target.value)}>
-              <option selected="">Select your Marital Status</option>
-              <option value="Bachelor">Bachelor</option>
-              <option value="Married">Married</option>
+              <option selected="">{(data.maritalStatus==="") ? "Select your Marital Status":data.maritalStatus}</option>
+              <option value="bachelor">Bachelor</option>
+              <option value="married">Married</option>
           </select>
         </div>
 
