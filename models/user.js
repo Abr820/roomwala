@@ -31,7 +31,7 @@ const userSchema = new mongoose.Schema({
     },
     profilePic:{
         type:String,
-        default:'path to default profile pic'
+        default:""
     },
     age:{
         type:Number,
