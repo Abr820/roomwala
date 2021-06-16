@@ -376,8 +376,8 @@ const AddRoom = () => {
               </p>
             </div>
 
-            <div>
-              <input type="submit" />
+            <div >
+              <input className="waves-effect btn red accent-4 pulse" type="submit" />
             </div>
           </form>
         </div>

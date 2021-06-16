@@ -228,7 +228,7 @@ const Profile = () => {
         </div>
 
         <div>
-        <input
+        <input className="waves-effect btn red accent-4 pulse"
           type="submit"
         />
         </div>
