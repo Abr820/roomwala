@@ -9,80 +9,74 @@ function Home(props) {
   const onSubmit = (data) => console.log(data);
   return (
     <>
-      <div className="section no-pad-bot" id="index-banner">
-        <div className="container">
-          <br />
-          <br />
-          <h1 className="header center orange-text">
-            Find Your New Place with Room-Wala
-          </h1>
-          <div className="row center">
-            <h5 className="header col s12 light">
-              Easy as making friends, with roomie you can look for many rooms
-              available across the country.
-            </h5>
-          </div>
-          <div className="flex items-center">
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
-              <AlgoliaPlaces
-                placeholder="Enter a City"
-                options={{
-                  appId: process.env.REACT_APP_APP,
-                  apiKey: process.env.REACT_APP_APPK,
-                  // language: "sv",
-                  countries: ["in"],
-                  type: "city",
-                  // Other options from https://community.algolia.com/places/documentation.html#options
-                }}
-                onChange={({ suggestion }) => {
-                  let state = suggestion.hasOwnProperty("administrative")
-                    ? suggestion.administrative
-                    : suggestion.hit.administrative[0];
-                  setCitySelected(`${suggestion.name}, ${state}`);
-                }}
-                onError={({ message }) =>
-                  console.log("Sorry, error with the API! ❌")
-                }
-              />
+      <div className="container home-left">
+        <br />
+        <br />
+        <div className="row">
+          <div className="col s12 m6">
+            <h1 className="header center orange-text">
+              Find Your New Place with Room-Wala
+            </h1>
+            <div className="row center">
+              <h5 className="header col s12 light">
+                Easy as making friends, with roomie you can look for many rooms
+                available across the country.
+              </h5>
+            </div>
+            {/***************************** * algolia********************************* */}
+            <div className="flex items-center">
+              <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
+                <AlgoliaPlaces
+                  placeholder="Enter a City"
+                  options={{
+                    appId: process.env.REACT_APP_APP,
+                    apiKey: process.env.REACT_APP_APPK,
+                    // language: "sv",
+                    countries: ["in"],
+                    type: "city",
+                    // Other options from https://community.algolia.com/places/documentation.html#options
+                  }}
+                  onChange={({ suggestion }) => {
+                    let state = suggestion.hasOwnProperty("administrative")
+                      ? suggestion.administrative
+                      : suggestion.hit.administrative[0];
+                    setCitySelected(`${suggestion.name}, ${state}`);
+                  }}
+                  onError={({ message }) =>
+                    console.log("Sorry, error with the API! ❌")
+                  }
+                />
 
-              <input
-                className=" waves-light btn btn-large cyan pulse"
-                // className="mt-4 sm:mt-0 bg-themeYellow mx-1 px-3 py-1 lg:ml-6 lg:text-2xl rounded-lg text-xl text-gray-800 focus:outline-none focus:shadow-outline shadow"
-                type="submit"
-                value="Search"
-              />
-            </form>
+                <input
+                  className="waves-effect btn-large red accent-4 pulse"
+                  // className="mt-4 sm:mt-0 bg-themeYellow mx-1 px-3 py-1 lg:ml-6 lg:text-2xl rounded-lg text-xl text-gray-800 focus:outline-none focus:shadow-outline shadow"
+                  type="submit"
+                  value="Search"
+                />
+              </form>
+            </div>
+            <div>
+              <h6>
+                <Link className="link blue-text pulse " to="/allrooms">
+                  All available rooms!
+                </Link>
+              </h6>
+            </div>
           </div>
-          <div>
-            <h6>
-              <Link className="link blue-text pulse " to="/allrooms">
-                All available rooms!
-              </Link>
-            </h6>
-          </div>
-          <div className="row center">
-            {/* <a
-              href="http://materializecss.com/getting-started.html"
-              id="download-button"
-              className="btn-large waves-effect waves-light orange"
-            >
-              Get Started
-            </a> 
-             */}
-
-            <div className="sm:py-4 lg:self-center">
+          {/* ***************image************************ */}
+          <div className="col s12 m6">
+            <div className="home-image">
               <img
-                className="p-4 w-full sm:w-3/4 mx-auto lg:w-auto"
-                src="https://blush.design/api/download?shareUri=XjBBvmxsvVzVKA2U&c=Clothing_0%7Eff4b33-0.1%7Eff8333&w=800&h=800&fm=png"
+                className="responsive-img"
+                src="https://i.pinimg.com/564x/6b/75/bb/6b75bb8a43bdff5a46f08bc21912e3a0.jpg"
                 alt="Rooms"
               />
             </div>
           </div>
-          <br />
-          <br />
         </div>
       </div>
 
+      {/* *************************card menu******************************* */}
       <div className="container">
         <div className="section">
           <div className="row">

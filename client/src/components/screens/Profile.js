@@ -107,8 +107,9 @@ const Profile = () => {
     <br/>
     <br/>
     <div className="container profile-container">
+    <br/>
     {/* picture on left */}
-      <div className="profilepic">
+      <div className="center-align profilepic">
         <img
           style={{width:"160px",height:"160px",borderRadius:"80px"}}
           //src = {(data.profilePic == "") ? "https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659651__480.png" : data.profilePic}
@@ -231,6 +232,7 @@ const Profile = () => {
         <input className="waves-effect btn red accent-4 pulse"
           type="submit"
         />
+        
         </div>
 
       </div>
