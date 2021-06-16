@@ -10,21 +10,32 @@ function Home(props) {
   return (
     <>
       <div className="container home-left">
-        <br />
-        <br />
+        
+        
         <div className="row">
           <div className="col s12 m6">
-            <h1 className="header center orange-text">
-              Find Your New Place with Room-Wala
+          {/* *******************heading *******************/}
+            <div className="card-panel1 heading-card1">
+            <h1 className="header center black-text">
+              Find Your New Place with <span className="span-room">🏠ROOMWALA!</span>
             </h1>
-            <div className="row center">
-              <h5 className="header col s12 light">
-                Easy as making friends, with roomie you can look for many rooms
-                available across the country.
-              </h5>
             </div>
+
+            
             {/***************************** * algolia********************************* */}
-            <div className="flex items-center">
+            <div className="card-panel1">
+            <div className="center">
+              <h4 className="heading-card2">
+                Easy as making friends, with roomie you can look for many rooms
+                available across the country.🌏
+              </h4>
+            </div>
+
+
+
+
+
+
               <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
                 <AlgoliaPlaces
                   placeholder="Enter a City"
@@ -68,7 +79,7 @@ function Home(props) {
             <div className="home-image">
               <img
                 className="responsive-img"
-                src="https://i.pinimg.com/564x/6b/75/bb/6b75bb8a43bdff5a46f08bc21912e3a0.jpg"
+                src="https://cdn.pixabay.com/photo/2017/01/23/16/35/home-2003069_960_720.png"
                 alt="Rooms"
               />
             </div>
