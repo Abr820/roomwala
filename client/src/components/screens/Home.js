@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
-import AlgoliaPlaces from 'algolia-places-react';
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+import AlgoliaPlaces from "algolia-places-react";
 
-function Home(props){
-
-  const [citySelected, setCitySelected] = useState('');
+function Home(props) {
+  const [citySelected, setCitySelected] = useState("");
   const { handleSubmit } = useForm();
-  const onSubmit = (data) => console.log(data)
+  const onSubmit = (data) => console.log(data);
   return (
     <>
       <div className="section no-pad-bot" id="index-banner">
@@ -24,10 +23,7 @@ function Home(props){
             </h5>
           </div>
           <div className="flex items-center">
-            <form
-              onSubmit={handleSubmit(onSubmit)}
-              className="flex flex-col"
-            >
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
               <AlgoliaPlaces
                 placeholder="Enter a City"
                 options={{
@@ -35,29 +31,37 @@ function Home(props){
                   apiKey: process.env.REACT_APP_APPK,
                   // language: "sv",
                   countries: ["in"],
-                  type: 'city',
+                  type: "city",
                   // Other options from https://community.algolia.com/places/documentation.html#options
                 }}
                 onChange={({ suggestion }) => {
-                  let state = suggestion.hasOwnProperty('administrative')
+                  let state = suggestion.hasOwnProperty("administrative")
                     ? suggestion.administrative
                     : suggestion.hit.administrative[0];
                   setCitySelected(`${suggestion.name}, ${state}`);
                 }}
                 onError={({ message }) =>
-                  console.log('Sorry, error with the API! ❌')
+                  console.log("Sorry, error with the API! ❌")
                 }
               />
 
               <input
-                //className="mt-4 sm:mt-0 bg-themeYellow mx-1 px-3 py-1 lg:ml-6 lg:text-2xl rounded-lg text-xl text-gray-800 focus:outline-none focus:shadow-outline shadow"
+                className=" waves-light btn btn-large cyan pulse"
+                // className="mt-4 sm:mt-0 bg-themeYellow mx-1 px-3 py-1 lg:ml-6 lg:text-2xl rounded-lg text-xl text-gray-800 focus:outline-none focus:shadow-outline shadow"
                 type="submit"
                 value="Search"
               />
             </form>
           </div>
+          <div>
+            <h6>
+              <Link className="link blue-text pulse " to="/allrooms">
+                All available rooms!
+              </Link>
+            </h6>
+          </div>
           <div className="row center">
-             {/* <a
+            {/* <a
               href="http://materializecss.com/getting-started.html"
               id="download-button"
               className="btn-large waves-effect waves-light orange"
@@ -65,9 +69,14 @@ function Home(props){
               Get Started
             </a> 
              */}
-             
-            <div className="sm:py-4 lg:self-center"><img className="p-4 w-full sm:w-3/4 mx-auto lg:w-auto" src="https://blush.design/api/download?shareUri=XjBBvmxsvVzVKA2U&c=Clothing_0%7Eff4b33-0.1%7Eff8333&w=800&h=800&fm=png" alt="Rooms"/></div>
-          
+
+            <div className="sm:py-4 lg:self-center">
+              <img
+                className="p-4 w-full sm:w-3/4 mx-auto lg:w-auto"
+                src="https://blush.design/api/download?shareUri=XjBBvmxsvVzVKA2U&c=Clothing_0%7Eff4b33-0.1%7Eff8333&w=800&h=800&fm=png"
+                alt="Rooms"
+              />
+            </div>
           </div>
           <br />
           <br />
@@ -208,6 +217,6 @@ function Home(props){
       </footer>
     </>
   );
-};
+}
 
 export default Home;

@@ -103,18 +103,22 @@ const Profile = () => {
   }
 
   return (
-    <div style={{maxWidth:"1200px" , margin:"0px auto"}}>
+    <>
+    <br/>
+    <br/>
+    <div className="container profile-container">
     {/* picture on left */}
-      <div>
+      <div className="profilepic">
         <img
           style={{width:"160px",height:"160px",borderRadius:"80px"}}
           //src = {(data.profilePic == "") ? "https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659651__480.png" : data.profilePic}
           //src="https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659651__480.png"
           src = {data.profilePic}
+          alt="profilepic"
         />
       </div>
 
-      <form onSubmit={handleSubmit(submit)}>
+      <form className="profile-form" onSubmit={handleSubmit(submit)}>
       <div>
         <input
           id="profileId"
@@ -232,6 +236,7 @@ const Profile = () => {
       </div>
       </form>
     </div>
+    </>
   )
 }
 

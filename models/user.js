@@ -33,6 +33,7 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:true,
         default:"https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659651__480.png"
+        
     },
     age:{
         type:Number,
