@@ -40,6 +40,8 @@ const SignUp = () => {
                 })
     }
     return (
+
+        
         <div className="myCard">
             <div className="card auth-card input-field">
                 <h2 className="brand-logo">ROOMWALA</h2>

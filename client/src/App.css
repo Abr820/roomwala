@@ -24,6 +24,18 @@ a {
 
   margin: 90px auto;
   background-color: hsl(60, 100%, 50%);
+  background: #fffc00; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to bottom,
+    #ffffff,
+    #fffc00
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #ffffff,
+    #fffc00
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
   box-sizing: border-box;
   border: 1px solid black;
   border-radius: 20px;
@@ -77,19 +89,47 @@ label {
 /* *************************addroom******************* */
 
 .addroom {
-  background-image: linear-gradient(orange, yellow);
-  border: 4px dashed black;
+  background: #acb6e5; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #86fde8,
+    #acb6e5
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #86fde8,
+    #acb6e5
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  /* background-image: linear-gradient(orange, yellow);
+  border: 4px dashed black; */
 }
 
 .addroom-form {
   padding: 50px;
   margin: 20px;
 }
+.addroom-heading {
+  font-family: "Poller One", cursive;
+}
 
 /************** profile */
 .profile-container {
-  background-image: linear-gradient(orange, yellow);
-  border: 4px dashed black;
+  background: #9796f0; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #fbc7d4,
+    #9796f0
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #fbc7d4,
+    #9796f0
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  /* background-image: linear-gradient(orange
+  , yellow);
+  border: 4px dashed black; */
 }
 .profile-form {
   padding: 50px;
@@ -136,4 +176,22 @@ label {
 }
 .heading-card2 {
   font-family: "Fredoka One", cursive;
+}
+
+.allroom-link h6 {
+  /* background-color: cyan; */
+  color: #ffea00;
+  font-style: italic;
+}
+
+.aboutcard {
+  box-shadow: orange 0px 30px 90px;
+}
+
+.contactcard {
+  box-shadow: orange 0px 30px 90px;
+}
+
+.supportcard {
+  box-shadow: orange 0px 30px 90px;
 }

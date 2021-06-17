@@ -62,15 +62,16 @@ const AddRoom = () => {
 
   return (
     <>
-    <br/>
-    <br/>
+    
+    
       <div
         className="container addroom"
         style={{ maxWidth: "1200px", margin: "0px auto" }}
       >
         {/* //header */}
+        
         <div className="center-align">
-          <h1 className="center bold">Room Details</h1>
+          <h1 className="addroom-heading">Room Details</h1>
         </div>
 
         {/* //form */}

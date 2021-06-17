@@ -111,7 +111,7 @@ const Profile = () => {
     {/* picture on left */}
       <div className="center-align profilepic">
         <img
-          style={{width:"160px",height:"160px",borderRadius:"80px"}}
+          style={{width:"160px",height:"160px",borderRadius:"80px",border:"3px dashed black"}}
           //src = {(data.profilePic == "") ? "https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659651__480.png" : data.profilePic}
           //src="https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659651__480.png"
           src = {data.profilePic}

@@ -10,31 +10,24 @@ function Home(props) {
   return (
     <>
       <div className="container home-left">
-        
-        
         <div className="row">
           <div className="col s12 m6">
-          {/* *******************heading *******************/}
+            {/* *******************heading *******************/}
             <div className="card-panel1 heading-card1">
-            <h1 className="header center black-text">
-              Find Your New Place with <span className="span-room">🏠ROOMWALA!</span>
-            </h1>
+              <h1 className="header center black-text">
+                Find Your New Place with{" "}
+                <span className="span-room">🏠ROOMWALA!</span>
+              </h1>
             </div>
 
-            
             {/***************************** * algolia********************************* */}
             <div className="card-panel1">
-            <div className="center">
-              <h4 className="heading-card2">
-                Easy as making friends, with roomie you can look for many rooms
-                available across the country.🌏
-              </h4>
-            </div>
-
-
-
-
-
+              <div className="center">
+                <h4 className="heading-card2">
+                  Easy as making friends, with roomie you can look for many
+                  rooms available across the country.🌏
+                </h4>
+              </div>
 
               <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
                 <AlgoliaPlaces
@@ -59,16 +52,19 @@ function Home(props) {
                 />
 
                 <input
-                  className="waves-effect btn-large red accent-4 pulse"
+                  className="waves-effect btn-large purple accent-3 pulse"
                   // className="mt-4 sm:mt-0 bg-themeYellow mx-1 px-3 py-1 lg:ml-6 lg:text-2xl rounded-lg text-xl text-gray-800 focus:outline-none focus:shadow-outline shadow"
                   type="submit"
                   value="Search"
                 />
               </form>
             </div>
-            <div>
+            <div className="allroom-link">
               <h6>
-                <Link className="link blue-text pulse " to="/allrooms">
+                <Link
+                  style={{ color: "red", cursor: "pointer" }}
+                  to="/allrooms"
+                >
                   All available rooms!
                 </Link>
               </h6>
@@ -88,55 +84,82 @@ function Home(props) {
       </div>
 
       {/* *************************card menu******************************* */}
-      <div className="container">
+      <div className="container home-card">
         <div className="section">
           <div className="row">
+          {/* about******************************** */}
             <div className="col s12 m4">
-              <div className="icon-block">
-                <h2 className="center light-blue-text">
-                  <i className="material-icons">Room wala</i>
-                </h2>
-                <h5 className="center">Speeds up development</h5>
-
-                <p className="light">
-                  We did most of the heavy lifting for you to provide a default
-                  stylings that incorporate our custom components. Additionally,
-                  we refined animations and transitions to provide a smoother
-                  experience for developers.
-                </p>
+              <div class="card aboutcard">
+                <div class="card-image waves-effect waves-block waves-light">
+                  <img class="activator" src="https://image.freepik.com/free-vector/about-us-concept-illustration_114360-639.jpg" />
+                </div>
+                <div class="card-content">
+                  <span class="card-title activator grey-text text-darken-4">
+                    About Us!<i class="material-icons right">more_vert</i>
+                  </span>
+                  <p>
+                    <a href="#">This is a link</a>
+                  </p>
+                </div>
+                <div class="card-reveal">
+                  <span class="card-title grey-text text-darken-4">
+                    About Us!<i class="material-icons right">close</i>
+                  </span>
+                  <p>
+                    Here is some more information about this product that is
+                    only revealed once clicked on.
+                  </p>
+                </div>
               </div>
             </div>
-
+{/* contact ****************************** */}
             <div className="col s12 m4">
-              <div className="icon-block">
-                <h2 className="center light-blue-text">
-                  <i className="material-icons">Room wala</i>
-                </h2>
-                <h5 className="center">User Experience Focused</h5>
-
-                <p className="light">
-                  By utilizing elements and principles of Material Design, we
-                  were able to create a framework that incorporates components
-                  and animations that provide more feedback to users.
-                  Additionally, a single underlying responsive system across all
-                  platforms allow for a more unified user experience.
-                </p>
+              <div class="card contactcard">
+                <div class="card-image waves-effect waves-block waves-light">
+                  <img class="activator" src="https://image.freepik.com/free-vector/teamwork-concept-landing-page_52683-20165.jpg"alt="pic" />
+                </div>
+                <div class="card-content">
+                  <span class="card-title activator grey-text text-darken-4">
+                    Contact Us!<i class="material-icons right">more_vert</i>
+                  </span>
+                  <p>
+                    <a href="#">This is a link</a>
+                  </p>
+                </div>
+                <div class="card-reveal">
+                  <span class="card-title grey-text text-darken-4">
+                    Contact Us!<i class="material-icons right">close</i>
+                  </span>
+                  <p>
+                    Here is some more information about this product that is
+                    only revealed once clicked on.
+                  </p>
+                </div>
               </div>
             </div>
-
+{/* support************************************** */}
             <div className="col s12 m4">
-              <div className="icon-block">
-                <h2 className="center light-blue-text">
-                  <i className="material-icons">contact us</i>
-                </h2>
-                <h5 className="center">Easy to work with</h5>
-
-                <p className="light">
-                  We have provided detailed documentation as well as specific
-                  code examples to help new users get started. We are also
-                  always open to feedback and can answer any questions a user
-                  may have about Materialize.
-                </p>
+              <div class="card supportcard">
+                <div class="card-image waves-effect waves-block waves-light">
+                  <img class="activator" src="https://image.freepik.com/free-vector/meet-our-team-concept-landing-page_52683-12190.jpg" />
+                </div>
+                <div class="card-content">
+                  <span class="card-title activator grey-text text-darken-4">
+                    Support Us!<i class="material-icons right">more_vert</i>
+                  </span>
+                  <p>
+                    <a href="#">This is a link</a>
+                  </p>
+                </div>
+                <div class="card-reveal">
+                  <span class="card-title grey-text text-darken-4">
+                    Support Us!<i class="material-icons right">close</i>
+                  </span>
+                  <p>
+                    Here is some more information about this product that is
+                    only revealed once clicked on.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -144,7 +167,7 @@ function Home(props) {
         <br />
         <br />
       </div>
-
+{/* ********************************footer************************************ */}
       <footer className="page-footer orange">
         <div className="container">
           <div className="row">
