@@ -24,13 +24,17 @@ a {
 
   margin: 90px auto;
   background-color: hsl(60, 100%, 50%);
-  background: #e65c00;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to bottom, #F9D423, #e65c00);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to bottom, #F9D423, #e65c00); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  
-
-
-
+  background: #e65c00; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to bottom,
+    #f9d423,
+    #e65c00
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #f9d423,
+    #e65c00
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
   box-sizing: border-box;
   border: 1px solid black;
@@ -109,6 +113,14 @@ label {
   font-family: "Poller One", cursive;
 }
 
+/* showroom**************************** */
+.showroom-panel {
+  font-family: "Rammetto One", cursive;
+}
+/* allroom**************************************** */
+.allrooms-panel{
+  font-family: "Rammetto One", cursive;
+}
 /************** profile */
 .profile-container {
   background: #9796f0; /* fallback for old browsers */

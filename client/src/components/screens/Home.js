@@ -87,11 +87,14 @@ function Home(props) {
       <div className="container home-card">
         <div className="section">
           <div className="row">
-          {/* about******************************** */}
+            {/* about******************************** */}
             <div className="col s12 m4">
-              <div class="card aboutcard">
+              <div class="card aboutcard hoverable">
                 <div class="card-image waves-effect waves-block waves-light">
-                  <img class="activator" src="https://image.freepik.com/free-vector/about-us-concept-illustration_114360-639.jpg" />
+                  <img
+                    class="activator"
+                    src="https://image.freepik.com/free-vector/about-us-concept-illustration_114360-639.jpg"
+                  />
                 </div>
                 <div class="card-content">
                   <span class="card-title activator grey-text text-darken-4">
@@ -112,11 +115,15 @@ function Home(props) {
                 </div>
               </div>
             </div>
-{/* contact ****************************** */}
+            {/* contact ****************************** */}
             <div className="col s12 m4">
-              <div class="card contactcard">
+              <div class="card contactcard hoverable">
                 <div class="card-image waves-effect waves-block waves-light">
-                  <img class="activator" src="https://image.freepik.com/free-vector/teamwork-concept-landing-page_52683-20165.jpg"alt="pic" />
+                  <img
+                    class="activator"
+                    src="https://image.freepik.com/free-vector/teamwork-concept-landing-page_52683-20165.jpg"
+                    alt="pic"
+                  />
                 </div>
                 <div class="card-content">
                   <span class="card-title activator grey-text text-darken-4">
@@ -137,11 +144,14 @@ function Home(props) {
                 </div>
               </div>
             </div>
-{/* support************************************** */}
+            {/* support************************************** */}
             <div className="col s12 m4">
-              <div class="card supportcard">
+              <div class="card supportcard hoverable">
                 <div class="card-image waves-effect waves-block waves-light">
-                  <img class="activator" src="https://image.freepik.com/free-vector/meet-our-team-concept-landing-page_52683-12190.jpg" />
+                  <img
+                    class="activator"
+                    src="https://image.freepik.com/free-vector/meet-our-team-concept-landing-page_52683-12190.jpg"
+                  />
                 </div>
                 <div class="card-content">
                   <span class="card-title activator grey-text text-darken-4">
@@ -167,7 +177,7 @@ function Home(props) {
         <br />
         <br />
       </div>
-{/* ********************************footer************************************ */}
+      {/* ********************************footer************************************ */}
       <footer className="page-footer orange">
         <div className="container">
           <div className="row">

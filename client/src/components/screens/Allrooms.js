@@ -10,8 +10,8 @@ const AllRooms = () => {
   return (
     <div className="container">
       <div className="section ">
-        <div class="card-panel yellow darken-3">
-          <h4 className="center-align">
+        <div class="card-panel yellow darken-3 allrooms-panel">
+          <h4 className="center-align ">
             Searching rooms in:
             <span style={{ color: "red" }}> Everywhere! 🌎</span>
           </h4>
@@ -155,7 +155,7 @@ const AllRooms = () => {
           <div class="col s12 m4">
             <div class="card hoverable yellow accent-2">
               <div class="card-image  waves-effect waves-block waves-light">
-                <img src="https://picsum.photos/200" alt="roompic"/>
+                <img src="https://picsum.photos/200" alt="roompic" />
                 <span class="card-title">Card Title</span>
               </div>
               <div class="card-content">

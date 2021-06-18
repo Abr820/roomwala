@@ -4,7 +4,7 @@ const ShowRoom = () => {
   return (
     <div className="container">
     <div class="col s12 m7 ">
-    <div class="card-panel yellow darken-3">
+    <div class="card-panel yellow darken-3 showroom-panel">
           <h4 className="center-align">
             🏘️ ROOM INFORMATION 👇
           </h4>
