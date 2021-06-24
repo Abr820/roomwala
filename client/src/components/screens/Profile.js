@@ -103,18 +103,23 @@ const Profile = () => {
   }
 
   return (
-    <div style={{maxWidth:"1200px" , margin:"0px auto"}}>
+    <>
+    <br/>
+    <br/>
+    <div className="container profile-container">
+    <br/>
     {/* picture on left */}
-      <div>
+      <div className="center-align profilepic">
         <img
-          style={{width:"160px",height:"160px",borderRadius:"80px"}}
+          style={{width:"160px",height:"160px",borderRadius:"80px",border:"3px dashed black"}}
           //src = {(data.profilePic == "") ? "https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659651__480.png" : data.profilePic}
           //src="https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659651__480.png"
           src = {data.profilePic}
+          alt="profilepic"
         />
       </div>
 
-      <form onSubmit={handleSubmit(submit)}>
+      <form className="profile-form" onSubmit={handleSubmit(submit)}>
       <div>
         <input
           id="profileId"
@@ -224,14 +229,16 @@ const Profile = () => {
         </div>
 
         <div>
-        <input
+        <input className="waves-effect btn red accent-4 pulse"
           type="submit"
         />
+        
         </div>
 
       </div>
       </form>
     </div>
+    </>
   )
 }
 

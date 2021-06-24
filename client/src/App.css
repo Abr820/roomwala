@@ -1,34 +1,50 @@
- @import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rammetto+One&display=swap");
+/* homepage */
+@import url("https://fonts.googleapis.com/css2?family=Poller+One&display=swap");
+/* heading2 */
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
 a {
   color: black !important;
 }
 
 .brand-logo {
-  font-family: "Righteous", cursive;
+  font-family: "Rammetto One", cursive;
 }
 
 .mycard {
   margin-top: 40px;
 }
 .auth-card h2 {
-  font-family: "Righteous", cursive;
+  font-family: "Rammetto One", cursive;
 }
 .auth-card {
-  padding: 20px;
+  padding: 30px;
   text-align: center;
-  max-width: 400px;
-  margin: 10px auto;
+  max-width: 700px;
+
+  margin: 90px auto;
   background-color: hsl(60, 100%, 50%);
+  background: #e65c00; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to bottom,
+    #f9d423,
+    #e65c00
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #f9d423,
+    #e65c00
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
   box-sizing: border-box;
   border: 1px solid black;
   border-radius: 20px;
   box-shadow: 10px 20px #888888;
 }
 .auth-card h5 {
-  font-family: "Righteous", cursive;
 }
 ::placeholder {
-  color: rgba(80, 72, 3, 0.979);
+  color: rgba(12, 12, 11, 0.979);
 }
 
 .input-field input[type="text"]:focus {
@@ -57,18 +73,133 @@ a {
   border-radius: 4px;
 }
 
-
- .icon-block {
+.icon-block {
   padding: 0 15px;
 }
 .icon-block .material-icons {
-	font-size: inherit;
-} 
+  font-size: inherit;
+}
 
-label{
+label {
   font-size: 30px;
   font-weight: bold;
   color: black;
 }
 
+/* *************************addroom******************* */
 
+.addroom {
+  background: #acb6e5; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #86fde8,
+    #acb6e5
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #86fde8,
+    #acb6e5
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  /* background-image: linear-gradient(orange, yellow);
+  border: 4px dashed black; */
+}
+
+.addroom-form {
+  padding: 50px;
+  margin: 20px;
+}
+.addroom-heading {
+  font-family: "Poller One", cursive;
+}
+
+/* showroom**************************** */
+.showroom-panel {
+  font-family: "Rammetto One", cursive;
+}
+/* allroom**************************************** */
+.allrooms-panel{
+  font-family: "Rammetto One", cursive;
+}
+/************** profile */
+.profile-container {
+  background: #9796f0; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #fbc7d4,
+    #9796f0
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #fbc7d4,
+    #9796f0
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  /* background-image: linear-gradient(orange
+  , yellow);
+  border: 4px dashed black; */
+}
+.profile-form {
+  padding: 50px;
+  margin: 20px;
+}
+
+/* ***********************homepage*********************** */
+.home-image {
+  height: 100%;
+  /* max-height: 100%; */
+  /* object-fit: contain; */
+  margin: 20px;
+}
+.home-image img {
+  max-width: 100%;
+  height: auto;
+  width: 500px;
+  height: 600px;
+  object-fit: cover;
+}
+
+.home-left {
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.9),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url("https://i.pinimg.com/originals/b6/10/ee/b610eee20249786dd2ec5cc72ccaa181.jpg");
+  /* background: linear-gradient(
+      rgba(255, 255, 255, 0.9),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url("https://i.pinimg.com/564x/b6/10/ee/b610eee20249786dd2ec5cc72ccaa181.jpg"); */
+}
+
+.heading-card1 {
+  /* background: linear-gradient(orange,yellow); */
+}
+.heading-card1 h1 {
+  font-family: "Poller One", cursive;
+}
+.span-room {
+  color: red;
+  font-family: "Rammetto One", cursive;
+}
+.heading-card2 {
+  font-family: "Fredoka One", cursive;
+}
+
+.allroom-link h6 {
+  /* background-color: cyan; */
+  color: #ffea00;
+  font-style: italic;
+}
+
+.aboutcard {
+  box-shadow: orange 0px 30px 90px;
+}
+
+.contactcard {
+  box-shadow: orange 0px 30px 90px;
+}
+
+.supportcard {
+  box-shadow: orange 0px 30px 90px;
+}
