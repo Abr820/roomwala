@@ -36,7 +36,7 @@ const roomSchema = new mongoose.Schema({
     },
     country:{
         type:String,
-        default:''
+        default:'India'
     },
     zip:{
         type:String,
@@ -51,7 +51,7 @@ const roomSchema = new mongoose.Schema({
     rent:{
         type:Number,
         required:[true,'rent per month must be mentioned'],
-        validate:validator.isNumeric
+        //validate:validator.isNumeric
     },
     createDate:{
         type: Date,

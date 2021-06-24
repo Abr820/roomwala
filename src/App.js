@@ -5,6 +5,7 @@ const PORT = 5000
 const {MONGOURI} = require('./keys')
 
 require('../models/user')
+require('../models/room')
 
 
 
@@ -34,6 +35,7 @@ App.use(express.urlencoded({extended: true}))
 App.use(require('../routes/signup'))
 App.use(require('../routes/login'))
 App.use(require('../routes/myprofile'))
+App.use(require('../routes/addroom'))
 
 App.get('/',middleWare,(req,res)=>{
   res.send("hello world")
