@@ -1,7 +1,7 @@
 import React,{useState} from "react"
 import {Link,useHistory} from "react-router-dom"
 import { useForm } from 'react-hook-form'
-//import M from "materialize-css"
+import M from "materialize-css"
 import "../../App.css"
 
 const AddRoom = () => {
@@ -13,7 +13,7 @@ const AddRoom = () => {
         addressMsg: "Please Provide address",
         cityMsg: "Please Provide city",
         stateMsg: "Please Enter state name",
-        descriptionMsg: "Provide description about your room atleast in 100 characters",
+        descriptionMsg: "Provide description about your room atleast in 60 characters",
         utilityMsg: "Please specify inclusion of utility",
         rentMsg: "Please mention Monthly rate for the room"
     }
@@ -38,26 +38,70 @@ const AddRoom = () => {
     const [maritalStatus,setStatus] = useState("")
     const [gender,setGender] = useState("")
     const [email,setEmail] = useState("")
+    const [image,setImage] = useState("")
+
+    const postDetails = () =>{
+        const picData = new FormData()
+        picData.append("file",image)
+        picData.append("upload_preset","room-wala")
+        picData.append("cloud_name","roomwala")
+        fetch(" https://api.cloudinary.com/v1_1/roomwala/image/upload",{
+          method:"POST",
+          body:picData
+        })
+        .then(res=>res.json())
+        .then(result=>{
+            console.log(result.url)
+            setmainPic(result.url)
+        })
+        .catch(err=>{
+          console.log(err)
+        })
+      }
 
     const submit = (e) =>{
         // e.preventDefault()
-        console.log(type)
-        console.log(mainPic)
-        console.log(contactPhone)
-        console.log(address)
-        console.log(city)
-        console.log(state)
-        console.log(zip)
-        console.log(utilitiesInc)
-        console.log(rent)
-        console.log(description)
-        console.log(maritalStatus)
-        console.log(gender)
-        console.log(email)
-        // console.log(typeof(zip))
-        // var temp = parseInt(zip,10)
-        // zip = temp
-        // console.log(typeof(zip))
+
+        if(type === "" || image === "" || address === "" || city === "" || state === "" || !(zip.valueOf()>=100000 && zip.valueOf()<=999999) || utilitiesInc === "" || rent === "" || rent.charAt(0) === 'e' || description.trim().length<60 || maritalStatus === "" || gender === "" ){
+            return M.toast({html: "Fill the required boxes correctly",classes: "#d32f2f red darken-2"})
+        }
+
+        postDetails()
+
+        fetch("/addroom",{       //used proxy to interact with http://localhost:5000
+            method:"post",
+            headers:{
+                "Content-Type":"application/json",
+                "Authorization":"Bearer "+localStorage.getItem("jwt")
+            },
+            body:JSON.stringify({
+                type,
+                address,
+                city,
+                state,
+                zip,
+                utilitiesInc,
+                rent,
+                description,
+                maritalStatus,
+                gender,
+                mainPic
+            })
+        })
+            .then(res => res.json())
+                .then(data => {
+                    if(data.error){
+                        M.toast({html: data.error , classes:"#d32f2f red darken-2"})
+                    }
+                    else{
+                        M.toast({html: "Room Listed Successfully" , classes:"#43a047 green darken-1"})
+                        history.push("/add")
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        
     }
     
 
@@ -201,7 +245,7 @@ const AddRoom = () => {
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                 />
-                <p style={(type === "" || type.trim().length()<100) ? {color: "red", display: "block"}:{display:"none"}}>{err.descriptionMsg}</p>
+                <p style={(description.trim().length<60) ? {color: "red", display: "block"}:{display:"none"}}>{err.descriptionMsg}</p>
                 </div>
 
                 <div>
@@ -242,11 +286,10 @@ const AddRoom = () => {
                 <input
                     id="imageId"
                     type="file"
-                    name="MainPic"
-                    value={mainPic}
-                    onChange={(e) => setmainPic(e.target.value)}
+                    name="image"
+                    onChange={(e) => setImage(e.target.files[0])}
                 />
-                <p style={(mainPic === "") ? {color: "red", display: "block"}:{display:"none"}}>{err.mainPicMsg}</p>
+                <p style={(image === "") ? {color: "red", display: "block"}:{display:"none"}}>{err.mainPicMsg}</p>
                 </div>
 
                 <div>
