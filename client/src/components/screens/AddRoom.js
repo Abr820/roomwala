@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { useForm } from "react-hook-form";
-//import M from "materialize-css"
-import "../../App.css";
+import React,{useState} from "react"
+import {Link,useHistory} from "react-router-dom"
+import { useForm } from 'react-hook-form'
+import M from "materialize-css"
+import "../../App.css"
 
 const AddRoom = () => {
   const err = {
@@ -23,42 +23,110 @@ const AddRoom = () => {
     pointerEvents: "all",
   };
 
-  const { handleSubmit } = useForm();
-  const history = useHistory();
-  const [type, setType] = useState("");
-  const [mainPic, setmainPic] = useState("");
-  const [contactPhone, setContactPhone] = useState("");
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [zip, setZip] = useState("");
-  const [utilitiesInc, setUtility] = useState("");
-  const [rent, setRent] = useState("");
-  const [description, setDescription] = useState("");
-  const [maritalStatus, setStatus] = useState("");
-  const [gender, setGender] = useState("");
-  const [email, setEmail] = useState("");
+    const err = {
+        zipMsg: "Give correct zip",
+        typeMsg: "Specify Room Type",
+        mainPicMsg: "Please Provide a specific picture",
+        addressMsg: "Please Provide address",
+        cityMsg: "Please Provide city",
+        stateMsg: "Please Enter state name",
+        descriptionMsg: "Provide description about your room atleast in 60 characters",
+        utilityMsg: "Please specify inclusion of utility",
+        rentMsg: "Please mention Monthly rate for the room"
+    }
+    const checkstyle = {    
+        position: "relative",
+        opacity: "1",
+        pointerEvents: "all",
+    }
+    
+    const {handleSubmit} = useForm()
+    const history=useHistory()
+    const [type,setType] = useState("")
+    const [mainPic,setmainPic] = useState("")
+    const [contactPhone,setContactPhone] = useState("")
+    const [address,setAddress] = useState("")
+    const [city,setCity] = useState("")
+    const [state,setState] = useState("")
+    const [zip,setZip] = useState("")
+    const [utilitiesInc,setUtility] = useState("")
+    const [rent,setRent] = useState("")
+    const [description,setDescription] = useState("")
+    const [maritalStatus,setStatus] = useState("")
+    const [gender,setGender] = useState("")
+    const [email,setEmail] = useState("")
+    const [image,setImage] = useState("")
 
-  const submit = (e) => {
-    // e.preventDefault()
-    console.log(type);
-    console.log(mainPic);
-    console.log(contactPhone);
-    console.log(address);
-    console.log(city);
-    console.log(state);
-    console.log(zip);
-    console.log(utilitiesInc);
-    console.log(rent);
-    console.log(description);
-    console.log(maritalStatus);
-    console.log(gender);
-    console.log(email);
-    // console.log(typeof(zip))
-    // var temp = parseInt(zip,10)
-    // zip = temp
-    // console.log(typeof(zip))
-  };
+    const postDetails = async() =>{
+        const picData = new FormData()
+        picData.append("file",image)
+        picData.append("upload_preset","room-wala")
+        picData.append("cloud_name","roomwala")
+
+        try {
+            const response = await fetch(" https://api.cloudinary.com/v1_1/roomwala/image/upload",{
+                method:"POST",
+                body:picData
+            })    
+            const res = await response.json();
+            console.log(res.url);
+            setmainPic(res.url);
+            
+        } catch (error) {
+            console.log(error);
+        }
+        return ;
+        
+      }
+
+    const submit = async(e) =>{
+        // e.preventDefault()
+        
+
+        if(type === "" || image === "" || address === "" || city === "" || state === "" || !(zip.valueOf()>=100000 && zip.valueOf()<=999999) || utilitiesInc === "" || rent === "" || rent.charAt(0) === 'e' || description.trim().length<60 || maritalStatus === "" || gender === "" ){
+            return M.toast({html: "Fill the required boxes correctly",classes: "#d32f2f red darken-2"})
+        }
+
+        await postDetails() 
+        
+
+        
+        fetch("/addroom",{       //used proxy to interact with http://localhost:5000
+            method:"post",
+            headers:{
+                "Content-Type":"application/json",
+                "Authorization":"Bearer "+localStorage.getItem("jwt")
+            },
+            body:JSON.stringify({
+                type,
+                address,
+                city,
+                state,
+                zip,
+                utilitiesInc,
+                rent,
+                description,
+                maritalStatus,
+                gender,
+                mainPic,
+            })
+        })
+            .then(res => res.json())
+                .then(data => {
+                    if(data.error){
+                        M.toast({html: data.error , classes:"#d32f2f red darken-2"})
+                    }
+                    else{
+                        M.toast({html: "Room Listed Successfully" , classes:"#43a047 green darken-1"})
+                        history.push("/add")
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        
+    }
+    
 
   return (
     <>
@@ -75,33 +143,19 @@ const AddRoom = () => {
         </div>
 
         {/* //form */}
-        <div className="addroom-form">
-          <hr></hr>
-          <form onSubmit={handleSubmit(submit)}>
-            <div>
-              <label className="" for="typeId">
-                Room Type
-              </label>
-              <select
-                id="typeId"
-                className="browser-default"
-                name="type"
-                onChange={(e) => setType(e.target.value)}
-              >
-                <option selected="selected">Select Room Type</option>
-                <option value="Private">Private</option>
-                <option value="Shared">Shared</option>
-              </select>
-              <p
-                style={
-                  type === ""
-                    ? { color: "red", display: "block" }
-                    : { display: "none" }
-                }
-              >
-                {err.typeMsg}
-              </p>
-            </div>
+        <div className="">
+        
+        <hr></hr>
+            <form onSubmit={handleSubmit(submit)}>
+                <div>
+                <label className="" for="typeId">Room Type</label>
+                <select id="typeId" className="browser-default" name="type" onChange={(e) => setType(e.target.value)}>
+                    <option selected="selected">Select Room Type</option>
+                    <option value="private">Private</option>
+                    <option value="shared">Shared</option>
+                </select>
+                <p style={(type === "") ? {color: "red", display: "block"}:{display:"none"}}>{err.typeMsg}</p>
+                </div>
 
             <div>
               <label className="">Utilities Included</label>
@@ -230,27 +284,17 @@ const AddRoom = () => {
               </p>
             </div>
 
-            <div>
-              <label className="" for="stateId">
-                State
-              </label>
-              <input
-                id="stateId"
-                type="text"
-                placeholder="State"
-                value={state}
-                onChange={(e) => setState(e.target.value)}
-              />
-              <p
-                style={
-                  state === ""
-                    ? { color: "red", display: "block" }
-                    : { display: "none" }
-                }
-              >
-                {err.stateMsg}
-              </p>
-            </div>
+                <div>
+                <label className="" for="describeId">Description</label>
+                <textarea
+                    id="describeId"
+                    type="text"
+                    placeholder="Describe about the room and facilities"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                />
+                <p style={(description.trim().length<60) ? {color: "red", display: "block"}:{display:"none"}}>{err.descriptionMsg}</p>
+                </div>
 
             <div>
               <label className="" for="zipId">
@@ -327,13 +371,13 @@ const AddRoom = () => {
                   E-Mail
                 </label>
                 <input
-                  id="mailId"
-                  type="email"
-                  placeholder="Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                    id="imageId"
+                    type="file"
+                    name="image"
+                    onChange={(e) => setImage(e.target.files[0])}
                 />
-              </div>
+                <p style={(image === "") ? {color: "red", display: "block"}:{display:"none"}}>{err.mainPicMsg}</p>
+                </div>
 
               <div>
                 <label className="" for="phoneId">
