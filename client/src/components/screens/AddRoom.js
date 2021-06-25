@@ -40,7 +40,7 @@ const AddRoom = () => {
     const [email,setEmail] = useState("")
     const [image,setImage] = useState("")
 
-    const postDetails = () =>{
+    const postDetails = async() =>{
         const picData = new FormData()
         picData.append("file",image)
         picData.append("upload_preset","room-wala")
@@ -59,15 +59,18 @@ const AddRoom = () => {
         })
       }
 
-    const submit = (e) =>{
+    const submit = async(e) =>{
         // e.preventDefault()
+        
 
         if(type === "" || image === "" || address === "" || city === "" || state === "" || !(zip.valueOf()>=100000 && zip.valueOf()<=999999) || utilitiesInc === "" || rent === "" || rent.charAt(0) === 'e' || description.trim().length<60 || maritalStatus === "" || gender === "" ){
             return M.toast({html: "Fill the required boxes correctly",classes: "#d32f2f red darken-2"})
         }
 
-        postDetails()
+        await postDetails() 
+        
 
+        
         fetch("/addroom",{       //used proxy to interact with http://localhost:5000
             method:"post",
             headers:{
@@ -85,7 +88,7 @@ const AddRoom = () => {
                 description,
                 maritalStatus,
                 gender,
-                mainPic
+                mainPic,
             })
         })
             .then(res => res.json())
