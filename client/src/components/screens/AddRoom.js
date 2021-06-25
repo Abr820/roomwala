@@ -40,39 +40,61 @@ const AddRoom = () => {
     const [gender,setGender] = useState("")
     const [email,setEmail] = useState("")
     const [image,setImage] = useState("")
+    var postData = {}
 
-    const postDetails = async() =>{
+    const postDetails = async () =>{
         const picData = new FormData()
         picData.append("file",image)
         picData.append("upload_preset","room-wala")
         picData.append("cloud_name","roomwala")
-
         try {
-            const response = await fetch(" https://api.cloudinary.com/v1_1/roomwala/image/upload",{
-                method:"POST",
-                body:picData
-            })    
-            const res = await response.json();
-            console.log(res.url);
-            setmainPic(res.url);
-            
+          const res = await fetch(" https://api.cloudinary.com/v1_1/roomwala/image/upload",{
+            method:"POST",
+            body:picData
+          })
+          const data = await res.json()
+          return data.url
         } catch (error) {
-            console.log(error);
+          console.log(error)
         }
-        return ;
-        
       }
 
     const submit = async(e) =>{
         // e.preventDefault()
+        console.log(type);
+        console.log(image);
+        console.log(address);
+        console.log(city);
+        console.log(state);
+        console.log(zip);
+        console.log(utilitiesInc);
+        console.log(rent);
+        console.log(description);
+        console.log(maritalStatus);
+        console.log(gender);
         
 
-        if(type === "" || image === "" || address === "" || city === "" || state === "" || !(zip.valueOf()>=100000 && zip.valueOf()<=999999) || utilitiesInc === "" || rent === "" || rent.charAt(0) === 'e' || description.trim().length<60 || maritalStatus === "" || gender === "" ){
+        if(type === "" || image === "" || address === "" || city === "" || state === "" || !(zip.valueOf()>=100000 && zip.valueOf()<=999999) || utilitiesInc === "" || rent === "" || rent.charAt(0) === 'e' || description.trim().length<100 || maritalStatus === "" || gender === "" ){
             return M.toast({html: "Fill the required boxes correctly",classes: "#d32f2f red darken-2"})
         }
-
-        await postDetails() 
         
+        const imageUrl = await postDetails() 
+        setmainPic(imageUrl)
+        postData = {
+                "type":type,
+                "utilitiesInc":utilitiesInc,
+                "gender":gender,
+                "maritalStatus":maritalStatus,
+                "address":address,
+                "city":city,
+                "state":state,
+                "zip":zip,
+                "description":description,
+                "rent":rent,
+                "email":email,
+                "contactPhone":contactPhone,
+                "mainPic":imageUrl,  
+                }
 
         
         fetch("/addroom",{       //used proxy to interact with http://localhost:5000
@@ -81,19 +103,7 @@ const AddRoom = () => {
                 "Content-Type":"application/json",
                 "Authorization":"Bearer "+localStorage.getItem("jwt")
             },
-            body:JSON.stringify({
-                type,
-                address,
-                city,
-                state,
-                zip,
-                utilitiesInc,
-                rent,
-                description,
-                maritalStatus,
-                gender,
-                mainPic,
-            })
+            body:JSON.stringify(postData)
         })
             .then(res => res.json())
                 .then(data => {
@@ -268,17 +278,27 @@ const AddRoom = () => {
               </p>
             </div>
 
-                <div>
-                <label className="" for="describeId">Description</label>
-                <textarea
-                    id="describeId"
-                    type="text"
-                    placeholder="Describe about the room and facilities"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                />
-                <p style={(description.trim().length<60) ? {color: "red", display: "block"}:{display:"none"}}>{err.descriptionMsg}</p>
-                </div>
+            <div>
+              <label className="" for="stateId">
+                State
+              </label>
+              <input
+                id="stateId"
+                type="text"
+                placeholder="State"
+                value={state}
+                onChange={(e) => setState(e.target.value)}
+              />
+              <p
+                style={
+                  state === ""
+                    ? { color: "red", display: "block" }
+                    : { display: "none" }
+                }
+              >
+                {err.stateMsg}
+              </p>
+            </div>
 
             <div>
               <label className="" for="zipId">
@@ -337,7 +357,7 @@ const AddRoom = () => {
               />
               <p
                 style={
-                  description === "" || description.length < 100
+                  description.length < 100
                     ? { color: "red", display: "block" }
                     : { display: "none" }
                 }
@@ -351,17 +371,17 @@ const AddRoom = () => {
               <label>For Tenants to contact:</label>
               <hr></hr>
               <div>
-                <label className="" for="mailId">
-                  E-Mail
+                <label className="" for="emailId">
+                  Email
                 </label>
                 <input
-                    id="imageId"
-                    type="file"
-                    name="image"
-                    onChange={(e) => setImage(e.target.files[0])}
+                  id="emailId"
+                  type="email"
+                  placeholder="E-Mail Address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
-                <p style={(image === "") ? {color: "red", display: "block"}:{display:"none"}}>{err.mainPicMsg}</p>
-                </div>
+              </div>
 
               <div>
                 <label className="" for="phoneId">
@@ -369,7 +389,7 @@ const AddRoom = () => {
                 </label>
                 <input
                   id="phoneId"
-                  type="phone"
+                  type="number"
                   placeholder="Phone/Mobile Number"
                   value={contactPhone}
                   onChange={(e) => setContactPhone(e.target.value)}
@@ -390,13 +410,12 @@ const AddRoom = () => {
               <input
                 id="imageId"
                 type="file"
-                name="MainPic"
-                value={mainPic}
-                onChange={(e) => setmainPic(e.target.value)}
+                name="image"
+                onChange={(e) => setImage(e.target.files[0])}
               />
               <p
                 style={
-                  mainPic === ""
+                  image === ""
                     ? { color: "red", display: "block" }
                     : { display: "none" }
                 }
