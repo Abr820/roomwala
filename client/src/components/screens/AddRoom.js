@@ -309,7 +309,7 @@ const AddRoom = () => {
               />
               <p
                 style={
-                  type === "" || type.trim().length() < 100
+                  description === "" || description.length < 100
                     ? { color: "red", display: "block" }
                     : { display: "none" }
                 }
