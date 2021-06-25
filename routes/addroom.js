@@ -25,13 +25,15 @@ router.post('/addroom',requiredlogin,(req,res)=>{
     if(!mainPic){
         return res.status(422).json({error:"Please add an Image of your room."})
     }
+    var contact
     if(contactPhone){
         if(!validator.isNumeric(contactPhone)){
             return res.status(422).json({error:"Kindly use a valid phone number."})
         }
+        contact=contactPhone
     }
     else{
-        contactPhone = req.user.phone
+        contact = req.user.phone
     }
 
     var boolUtilitiesInc = (utilitiesInc == 'true') || (utilitiesInc == 'True') || (utilitiesInc == 'TRUE')
@@ -43,7 +45,7 @@ router.post('/addroom',requiredlogin,(req,res)=>{
     const room = new Room({
         type,
         mainPic,
-        contactPhone,
+        contactPhone:contact,
         address,
         city,
         state,
@@ -56,10 +58,12 @@ router.post('/addroom',requiredlogin,(req,res)=>{
     })
     room.save()
     .then(room=>{
+        console.log(room)
         res.json({message:"saved successfully"})
     })
     .catch(err=>{
         console.log("error in saving:",err)
+        return res.status(422).json({error:"Server Problem. Try again"})
     })
     
 })
