@@ -40,32 +40,6 @@ const SignUp = () => {
                 .catch(err => {
                     console.log(err);
                 })
-    }
-    fetch("/signup", {
-      //used proxy to interact with http://localhost:5000
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        email,
-        phone,
-        password,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.error) {
-          M.toast({ html: data.error, classes: "#d32f2f red darken-2" });
-        } else {
-          M.toast({ html: data.message, classes: "#43a047 green darken-1" });
-          history.push("/login");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   };
   return (
     <div className="container home-card">
@@ -127,5 +101,6 @@ const SignUp = () => {
     </div>
   );
 };
+
 
 export default SignUp;

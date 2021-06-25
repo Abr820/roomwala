@@ -23,22 +23,6 @@ const AddRoom = () => {
     pointerEvents: "all",
   };
 
-    const err = {
-        zipMsg: "Give correct zip",
-        typeMsg: "Specify Room Type",
-        mainPicMsg: "Please Provide a specific picture",
-        addressMsg: "Please Provide address",
-        cityMsg: "Please Provide city",
-        stateMsg: "Please Enter state name",
-        descriptionMsg: "Provide description about your room atleast in 60 characters",
-        utilityMsg: "Please specify inclusion of utility",
-        rentMsg: "Please mention Monthly rate for the room"
-    }
-    const checkstyle = {    
-        position: "relative",
-        opacity: "1",
-        pointerEvents: "all",
-    }
     
     const {handleSubmit} = useForm()
     const history=useHistory()

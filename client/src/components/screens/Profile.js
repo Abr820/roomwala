@@ -21,23 +21,21 @@ const Profile = () => {
     const [profilePic,setProfilePic] = useState("")
     var postData = {}
 
-    const postDetails = () =>{
+    const postDetails = async () =>{
       const picData = new FormData()
       picData.append("file",image)
       picData.append("upload_preset","room-wala")
       picData.append("cloud_name","roomwala")
-      fetch(" https://api.cloudinary.com/v1_1/roomwala/image/upload",{
-        method:"POST",
-        body:picData
-      })
-      .then(res=>res.json())
-      .then(result=>{
-          console.log(result.url)
-          setProfilePic(result.url)
-      })
-      .catch(err=>{
-        console.log(err)
-      })
+      try {
+        const res = await fetch(" https://api.cloudinary.com/v1_1/roomwala/image/upload",{
+          method:"POST",
+          body:picData
+        })
+        const data = await res.json()
+        return data.url
+      } catch (error) {
+        console.log(error)
+      }
     }
     
     
@@ -60,7 +58,7 @@ const Profile = () => {
       return  () => {}
   },[])
 
-  const submit = (e) => {
+  const submit = async (e) => {
     if(age !== "") postData = {...postData, "age": age}
     if(city !== "") postData = {...postData, "city": city}
     if(profession !== "") postData = {...postData, "profession": profession}
@@ -68,8 +66,9 @@ const Profile = () => {
     if(maritalStatus !== "") postData = {...postData, "maritalStatus": maritalStatus}
     if(about !== "") postData = {...postData, "about": about}
     if(image !== "") {
-      postDetails()
-      postData = {...postData, "profilePic":profilePic}
+      const imageUrl = await postDetails()
+      setProfilePic(imageUrl)
+      postData = {...postData, "profilePic":imageUrl}
     }
     //if(about !== "") postData = {...postData, "about": about}
 
