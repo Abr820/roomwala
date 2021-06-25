@@ -45,18 +45,21 @@ const AddRoom = () => {
         picData.append("file",image)
         picData.append("upload_preset","room-wala")
         picData.append("cloud_name","roomwala")
-        fetch(" https://api.cloudinary.com/v1_1/roomwala/image/upload",{
-          method:"POST",
-          body:picData
-        })
-        .then(res=>res.json())
-        .then(result=>{
-            console.log(result.url)
-            setmainPic(result.url)
-        })
-        .catch(err=>{
-          console.log(err)
-        })
+
+        try {
+            const response = await fetch(" https://api.cloudinary.com/v1_1/roomwala/image/upload",{
+                method:"POST",
+                body:picData
+            })    
+            const res = await response.json();
+            console.log(res.url);
+            setmainPic(res.url);
+            
+        } catch (error) {
+            console.log(error);
+        }
+        return ;
+        
       }
 
     const submit = async(e) =>{
@@ -124,8 +127,8 @@ const AddRoom = () => {
                 <label className="" for="typeId">Room Type</label>
                 <select id="typeId" className="browser-default" name="type" onChange={(e) => setType(e.target.value)}>
                     <option selected="selected">Select Room Type</option>
-                    <option value="Private">Private</option>
-                    <option value="Shared">Shared</option>
+                    <option value="private">Private</option>
+                    <option value="shared">Shared</option>
                 </select>
                 <p style={(type === "") ? {color: "red", display: "block"}:{display:"none"}}>{err.typeMsg}</p>
                 </div>
