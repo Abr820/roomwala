@@ -74,27 +74,27 @@ const AddRoom = () => {
         console.log(gender);
         
 
-        if(type === "" || image === "" || address === "" || city === "" || state === "" || !(zip.valueOf()>=100000 && zip.valueOf()<=999999) || utilitiesInc === "" || rent === "" || rent.charAt(0) === 'e' || description.trim().length<100 || maritalStatus === "" || gender === "" ){
+        if(type === "" || image === "" || address === "" || city === "" || state === "" || !(zip.valueOf()>=100000 && zip.valueOf()<=999999) || utilitiesInc === "" || rent === "" || rent.charAt(0) === 'e' || description.trim().length<100 || maritalStatus === "" || gender === "" || contactPhone === ""){
             return M.toast({html: "Fill the required boxes correctly",classes: "#d32f2f red darken-2"})
         }
         
         const imageUrl = await postDetails() 
         setmainPic(imageUrl)
-        postData = {
-                "type":type,
-                "utilitiesInc":utilitiesInc,
-                "gender":gender,
-                "maritalStatus":maritalStatus,
-                "address":address,
-                "city":city,
-                "state":state,
-                "zip":zip,
-                "description":description,
-                "rent":rent,
-                "email":email,
-                "contactPhone":contactPhone,
-                "mainPic":imageUrl,  
-                }
+        // postData = {
+        //         "type":type,
+        //         "utilitiesInc":utilitiesInc,
+        //         "gender":gender,
+        //         "maritalStatus":maritalStatus,
+        //         "address":address,
+        //         "city":city,
+        //         "state":state,
+        //         "zip":zip,
+        //         "description":description,
+        //         "rent":rent,
+        //         "email":email,
+        //         "contactPhone":contactPhone,
+        //         "mainPic":imageUrl,  
+        //         }
 
         
         fetch("/addroom",{       //used proxy to interact with http://localhost:5000
@@ -103,7 +103,20 @@ const AddRoom = () => {
                 "Content-Type":"application/json",
                 "Authorization":"Bearer "+localStorage.getItem("jwt")
             },
-            body:JSON.stringify(postData)
+            body:JSON.stringify({
+                type,
+                utilitiesInc,
+                gender,
+                maritalStatus,
+                address,
+                city,
+                state,
+                description,
+                rent,
+                email,
+                contactPhone,
+                imageUrl,
+            })
         })
             .then(res => res.json())
                 .then(data => {
@@ -112,7 +125,7 @@ const AddRoom = () => {
                     }
                     else{
                         M.toast({html: "Room Listed Successfully" , classes:"#43a047 green darken-1"})
-                        history.push("/add")
+                        history.push("/")
                     }
                 })
                 .catch(err => {

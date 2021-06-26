@@ -9,7 +9,7 @@ const requiredlogin = require("../auths/requiredLogin")
 router.post('/addroom',requiredlogin,(req,res)=>{
     console.log(req.body,"signup auth executed")
     const { type,
-            mainPic,
+            imageUrl,
             contactPhone,
             address,
             city,
@@ -19,14 +19,14 @@ router.post('/addroom',requiredlogin,(req,res)=>{
             utilitiesInc,
             rent,
             description} = req.body
-    if(!type || !address || !city || !zip || !rent){
-        return res.status(422).json({error:"Please fill up all the required fields."})
-    }
-    if(!mainPic){
-        return res.status(422).json({error:"Please add an Image of your room."})
-    }
+    // if(type==="" || address==="" || city==="" || zip==="" || rent===""){
+    //     return res.status(422).json({error:"Please fill up all the required fields."})
+    // }
+    // if(imageUrl===""){
+    //     return res.status(422).json({error:"Please add an Image of your room."})
+    // }
     var contact
-    if(contactPhone){
+    if(contactPhone!==""){
         if(!validator.isNumeric(contactPhone)){
             return res.status(422).json({error:"Kindly use a valid phone number."})
         }
@@ -38,13 +38,13 @@ router.post('/addroom',requiredlogin,(req,res)=>{
 
     var boolUtilitiesInc = (utilitiesInc == 'true') || (utilitiesInc == 'True') || (utilitiesInc == 'TRUE')
     var  intRent = parseInt(rent, 10);
-    if(!validator.isNumeric(zip)){
-        return res.status(422).json({error:"Kindly use a valid zip code."})
-    }
+    // if(!validator.isNumeric(zip)){
+    //     return res.status(422).json({error:"Kindly use a valid zip code."})
+    // }
 
     const room = new Room({
         type,
-        mainPic,
+        mainPic:imageUrl,
         contactPhone:contact,
         address,
         city,
