@@ -19,6 +19,7 @@ const AllRooms = () => {
         {/* <br />
         <br /> */}
         <div class="row">
+          {/**************************************single-card***************************** */}
           <div class="col s12 m4">
             <div class="card hoverable yellow accent-2">
               <div class="card-image  waves-effect waves-block waves-light">
@@ -41,139 +42,7 @@ const AllRooms = () => {
               </div>
             </div>
           </div>
-          <div class="col s12 m4">
-            <div class="card hoverable yellow accent-2">
-              <div class="card-image  waves-effect waves-block waves-light">
-                <img src="https://picsum.photos/200" />
-                <span class="card-title">Card Title</span>
-              </div>
-              <div class="card-content">
-                <p>
-                  I am a very simple card. I am good at containing small bits of
-                  information. I am convenient because I require little markup
-                  to use effectively.
-                </p>
-              </div>
-              <div class="card-action">
-                {/* <a href="#">This is a link</a> */}
-
-                <Link className="link" to="/showroom">
-                  Show Details!
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          <div class="col s12 m4">
-            <div class="card hoverable yellow accent-2">
-              <div class="card-image  waves-effect waves-block waves-light">
-                <img src="https://picsum.photos/200" />
-                <span class="card-title">Card Title</span>
-              </div>
-              <div class="card-content">
-                <p>
-                  I am a very simple card. I am good at containing small bits of
-                  information. I am convenient because I require little markup
-                  to use effectively.
-                </p>
-              </div>
-              <div class="card-action">
-                {/* <a href="#">This is a link</a> */}
-
-                <Link className="link" to="/showroom">
-                  Show Details!
-                </Link>
-              </div>
-            </div>
-          </div>
-          <div class="col s12 m4">
-            <div class="card hoverable yellow accent-2">
-              <div class="card-image  waves-effect waves-block waves-light">
-                <img src="https://picsum.photos/200" />
-                <span class="card-title">Card Title</span>
-              </div>
-              <div class="card-content">
-                <p>
-                  I am a very simple card. I am good at containing small bits of
-                  information. I am convenient because I require little markup
-                  to use effectively.
-                </p>
-              </div>
-              <div class="card-action">
-                {/* <a href="#">This is a link</a> */}
-
-                <Link className="link" to="/showroom">
-                  Show Details!
-                </Link>
-              </div>
-            </div>
-          </div>
-          <div class="col s12 m4">
-            <div class="card hoverable yellow accent-2">
-              <div class="card-image  waves-effect waves-block waves-light">
-                <img src="https://picsum.photos/200" />
-                <span class="card-title">Card Title</span>
-              </div>
-              <div class="card-content">
-                <p>
-                  I am a very simple card. I am good at containing small bits of
-                  information. I am convenient because I require little markup
-                  to use effectively.
-                </p>
-              </div>
-              <div class="card-action">
-                {/* <a href="#">This is a link</a> */}
-
-                <Link className="link" to="/showroom">
-                  Show Details!
-                </Link>
-              </div>
-            </div>
-          </div>
-          <div class="col s12 m4">
-            <div class="card hoverable yellow accent-2">
-              <div class="card-image  waves-effect waves-block waves-light">
-                <img src="https://picsum.photos/200" />
-                <span class="card-title">Card Title</span>
-              </div>
-              <div class="card-content">
-                <p>
-                  I am a very simple card. I am good at containing small bits of
-                  information. I am convenient because I require little markup
-                  to use effectively.
-                </p>
-              </div>
-              <div class="card-action">
-                {/* <a href="#">This is a link</a> */}
-
-                <Link className="link" to="/showroom">
-                  Show Details!
-                </Link>
-              </div>
-            </div>
-          </div>
-          <div class="col s12 m4">
-            <div class="card hoverable yellow accent-2">
-              <div class="card-image  waves-effect waves-block waves-light">
-                <img src="https://picsum.photos/200" alt="roompic" />
-                <span class="card-title">Card Title</span>
-              </div>
-              <div class="card-content">
-                <p>
-                  I am a very simple card. I am good at containing small bits of
-                  information. I am convenient because I require little markup
-                  to use effectively.
-                </p>
-              </div>
-              <div class="card-action">
-                {/* <a href="#">This is a link</a> */}
-
-                <Link className="link" to="/showroom">
-                  Show Details!
-                </Link>
-              </div>
-            </div>
-          </div>
+          {/* *******************************************card-ending *******************************************/}
         </div>
       </div>
     </div>
