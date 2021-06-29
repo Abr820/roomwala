@@ -15,6 +15,8 @@ router.post('/addroom',requiredlogin,(req,res)=>{
             city,
             state,
             country,
+            gender,
+            maritalStatus,
             zip,
             utilitiesInc,
             rent,
@@ -38,6 +40,7 @@ router.post('/addroom',requiredlogin,(req,res)=>{
 
     var boolUtilitiesInc = (utilitiesInc == 'true') || (utilitiesInc == 'True') || (utilitiesInc == 'TRUE')
     var  intRent = parseInt(rent, 10);
+    
     // if(!validator.isNumeric(zip)){
     //     return res.status(422).json({error:"Kindly use a valid zip code."})
     // }
@@ -50,6 +53,8 @@ router.post('/addroom',requiredlogin,(req,res)=>{
         city,
         state,
         country,
+        gender,
+        maritalStatus,
         zip,
         utilitiesInc:boolUtilitiesInc,
         rent:intRent,

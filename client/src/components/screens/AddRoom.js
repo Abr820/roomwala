@@ -61,17 +61,6 @@ const AddRoom = () => {
 
     const submit = async(e) =>{
         // e.preventDefault()
-        console.log(type);
-        console.log(image);
-        console.log(address);
-        console.log(city);
-        console.log(state);
-        console.log(zip);
-        console.log(utilitiesInc);
-        console.log(rent);
-        console.log(description);
-        console.log(maritalStatus);
-        console.log(gender);
         
 
         if(type === "" || image === "" || address === "" || city === "" || state === "" || !(zip.valueOf()>=100000 && zip.valueOf()<=999999) || utilitiesInc === "" || rent === "" || rent.charAt(0) === 'e' || description.trim().length<100 || maritalStatus === "" || gender === "" || contactPhone === ""){
@@ -80,21 +69,6 @@ const AddRoom = () => {
         
         const imageUrl = await postDetails() 
         setmainPic(imageUrl)
-        // postData = {
-        //         "type":type,
-        //         "utilitiesInc":utilitiesInc,
-        //         "gender":gender,
-        //         "maritalStatus":maritalStatus,
-        //         "address":address,
-        //         "city":city,
-        //         "state":state,
-        //         "zip":zip,
-        //         "description":description,
-        //         "rent":rent,
-        //         "email":email,
-        //         "contactPhone":contactPhone,
-        //         "mainPic":imageUrl,  
-        //         }
 
         
         fetch("/addroom",{       //used proxy to interact with http://localhost:5000
@@ -150,12 +124,12 @@ const AddRoom = () => {
         </div>
 
         {/* //form */}
-        <div className="">
+        <div className="addroom-form">
         
         <hr></hr>
             <form onSubmit={handleSubmit(submit)}>
                 <div>
-                <label className="" for="typeId">Room Type</label>
+                <label className="" htmlFor="typeId">Room Type</label>
                 <select id="typeId" className="browser-default" name="type" onChange={(e) => setType(e.target.value)}>
                     <option selected="selected">Select Room Type</option>
                     <option value="private">Private</option>
@@ -224,9 +198,9 @@ const AddRoom = () => {
                 onChange={(e) => setGender(e.target.value)}
               >
                 <option selected="selected">Select Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Any">Any</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="any">Any</option>
               </select>
             </div>
 
@@ -241,9 +215,9 @@ const AddRoom = () => {
                 onChange={(e) => setStatus(e.target.value)}
               >
                 <option selected="selected">Select Marital Status</option>
-                <option value="Bachelor">Bachelor</option>
-                <option value="Married">Married</option>
-                <option value="Any">Any</option>
+                <option value="bachelor">Bachelor</option>
+                <option value="married">Married</option>
+                <option value="any">Any</option>
               </select>
             </div>
 
