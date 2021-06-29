@@ -3,6 +3,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Poller+One&display=swap");
 /* heading2 */
 @import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
+/* allrooms */
+@import url("https://fonts.googleapis.com/css2?family=Cabin&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Jomhuria&display=swap');
 a {
   color: black !important;
 }
@@ -113,15 +116,60 @@ label {
   font-family: "Poller One", cursive;
 }
 
-/* showroom**************************** */
+/************************** showroom**************************** */
 .showroom-panel {
   font-family: "Rammetto One", cursive;
 }
-/* allroom**************************************** */
-.allrooms-panel{
+/* *******************allroom**************************************** */
+.allrooms-panel {
   font-family: "Rammetto One", cursive;
 }
-/************** profile */
+
+.card-image {
+  /* border: 2px dashed black; */
+  /* border-radius: 10px; */
+  /* padding: 10px; */
+  /* width: 200px; */
+  height: 200px;
+}
+.allroom-card {
+  /* width: 80px; */
+  height: 440px;
+}
+.card-rent {
+  /* background-color: #e65c00; */
+  color: white !important;
+  font-style: italic;
+  border-radius: 50px;
+  /* width: 10px; */
+  font-weight: bold !important;
+}
+.card-rent h5 {
+  background-color: black;
+  /* color: red !important; */
+  font-style: italic;
+  border-radius: 40px;
+  /* width: 10px; */
+  /* font-weight: bold !important; */
+}
+.room-type {
+  background-color: orange;
+  border-radius: 10px;
+}
+.room-city {
+  font-family: "Cabin", sans-serif;
+  /* padding: 5px; */
+  /* background-color: orange; */
+}
+.room-city1{
+  font-family: 'Jomhuria', cursive;
+  font-size: 35px;
+}
+.room-city h5 {
+  text-transform: capitalize;
+}
+
+/************** profile ************************************/
 .profile-container {
   background: #9796f0; /* fallback for old browsers */
   background: -webkit-linear-gradient(
