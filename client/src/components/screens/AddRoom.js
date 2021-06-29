@@ -63,7 +63,7 @@ const AddRoom = () => {
         // e.preventDefault()
         
 
-        if(type === "" || image === "" || address === "" || city === "" || state === "" || !(zip.valueOf()>=100000 && zip.valueOf()<=999999) || utilitiesInc === "" || rent === "" || rent.charAt(0) === 'e' || description.trim().length<100 || maritalStatus === "" || gender === "" || contactPhone === ""){
+        if(type === "" || image === "" || address === "" || city === "" || state === "" || !(zip.valueOf()>=100000 && zip.valueOf()<=999999) || utilitiesInc === "" || rent === "" || rent.charAt(0) === 'e' || description.trim().length<100 || maritalStatus === "" || gender === ""){
             return M.toast({html: "Fill the required boxes correctly",classes: "#d32f2f red darken-2"})
         }
         
