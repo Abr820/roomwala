@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { useForm } from "react-hook-form";
-//import M from "materialize-css"
-import "../../App.css";
+import React,{useState} from "react"
+import {Link,useHistory} from "react-router-dom"
+import { useForm } from 'react-hook-form'
+import M from "materialize-css"
+import "../../App.css"
 
 const AddRoom = () => {
   const err = {
@@ -23,42 +23,91 @@ const AddRoom = () => {
     pointerEvents: "all",
   };
 
-  const { handleSubmit } = useForm();
-  const history = useHistory();
-  const [type, setType] = useState("");
-  const [mainPic, setmainPic] = useState("");
-  const [contactPhone, setContactPhone] = useState("");
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [zip, setZip] = useState("");
-  const [utilitiesInc, setUtility] = useState("");
-  const [rent, setRent] = useState("");
-  const [description, setDescription] = useState("");
-  const [maritalStatus, setStatus] = useState("");
-  const [gender, setGender] = useState("");
-  const [email, setEmail] = useState("");
+    
+    const {handleSubmit} = useForm()
+    const history=useHistory()
+    const [type,setType] = useState("")
+    const [mainPic,setmainPic] = useState("")
+    const [contactPhone,setContactPhone] = useState("")
+    const [address,setAddress] = useState("")
+    const [city,setCity] = useState("")
+    const [state,setState] = useState("")
+    const [zip,setZip] = useState("")
+    const [utilitiesInc,setUtility] = useState("")
+    const [rent,setRent] = useState("")
+    const [description,setDescription] = useState("")
+    const [maritalStatus,setStatus] = useState("")
+    const [gender,setGender] = useState("")
+    const [email,setEmail] = useState("")
+    const [image,setImage] = useState("")
+    var postData = {}
 
-  const submit = (e) => {
-    // e.preventDefault()
-    console.log(type);
-    console.log(mainPic);
-    console.log(contactPhone);
-    console.log(address);
-    console.log(city);
-    console.log(state);
-    console.log(zip);
-    console.log(utilitiesInc);
-    console.log(rent);
-    console.log(description);
-    console.log(maritalStatus);
-    console.log(gender);
-    console.log(email);
-    // console.log(typeof(zip))
-    // var temp = parseInt(zip,10)
-    // zip = temp
-    // console.log(typeof(zip))
-  };
+    const postDetails = async () =>{
+        const picData = new FormData()
+        picData.append("file",image)
+        picData.append("upload_preset","room-wala")
+        picData.append("cloud_name","roomwala")
+        try {
+          const res = await fetch(" https://api.cloudinary.com/v1_1/roomwala/image/upload",{
+            method:"POST",
+            body:picData
+          })
+          const data = await res.json()
+          return data.url
+        } catch (error) {
+          console.log(error)
+        }
+      }
+
+    const submit = async(e) =>{
+        // e.preventDefault()
+        
+
+        if(type === "" || image === "" || address === "" || city === "" || state === "" || !(zip.valueOf()>=100000 && zip.valueOf()<=999999) || utilitiesInc === "" || rent === "" || rent.charAt(0) === 'e' || description.trim().length<100 || maritalStatus === "" || gender === "" || contactPhone === ""){
+            return M.toast({html: "Fill the required boxes correctly",classes: "#d32f2f red darken-2"})
+        }
+        
+        const imageUrl = await postDetails() 
+        setmainPic(imageUrl)
+
+        
+        fetch("/addroom",{       //used proxy to interact with http://localhost:5000
+            method:"post",
+            headers:{
+                "Content-Type":"application/json",
+                "Authorization":"Bearer "+localStorage.getItem("jwt")
+            },
+            body:JSON.stringify({
+                type,
+                utilitiesInc,
+                gender,
+                maritalStatus,
+                address,
+                city,
+                state,
+                description,
+                rent,
+                email,
+                contactPhone,
+                imageUrl,
+            })
+        })
+            .then(res => res.json())
+                .then(data => {
+                    if(data.error){
+                        M.toast({html: data.error , classes:"#d32f2f red darken-2"})
+                    }
+                    else{
+                        M.toast({html: "Room Listed Successfully" , classes:"#43a047 green darken-1"})
+                        history.push("/")
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        
+    }
+    
 
   return (
     <>
@@ -76,32 +125,18 @@ const AddRoom = () => {
 
         {/* //form */}
         <div className="addroom-form">
-          <hr></hr>
-          <form onSubmit={handleSubmit(submit)}>
-            <div>
-              <label className="" for="typeId">
-                Room Type
-              </label>
-              <select
-                id="typeId"
-                className="browser-default"
-                name="type"
-                onChange={(e) => setType(e.target.value)}
-              >
-                <option selected="selected">Select Room Type</option>
-                <option value="Private">Private</option>
-                <option value="Shared">Shared</option>
-              </select>
-              <p
-                style={
-                  type === ""
-                    ? { color: "red", display: "block" }
-                    : { display: "none" }
-                }
-              >
-                {err.typeMsg}
-              </p>
-            </div>
+        
+        <hr></hr>
+            <form onSubmit={handleSubmit(submit)}>
+                <div>
+                <label className="" htmlFor="typeId">Room Type</label>
+                <select id="typeId" className="browser-default" name="type" onChange={(e) => setType(e.target.value)}>
+                    <option selected="selected">Select Room Type</option>
+                    <option value="private">Private</option>
+                    <option value="shared">Shared</option>
+                </select>
+                <p style={(type === "") ? {color: "red", display: "block"}:{display:"none"}}>{err.typeMsg}</p>
+                </div>
 
             <div>
               <label className="">Utilities Included</label>
@@ -163,9 +198,9 @@ const AddRoom = () => {
                 onChange={(e) => setGender(e.target.value)}
               >
                 <option selected="selected">Select Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Any">Any</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="any">Any</option>
               </select>
             </div>
 
@@ -180,9 +215,9 @@ const AddRoom = () => {
                 onChange={(e) => setStatus(e.target.value)}
               >
                 <option selected="selected">Select Marital Status</option>
-                <option value="Bachelor">Bachelor</option>
-                <option value="Married">Married</option>
-                <option value="Any">Any</option>
+                <option value="bachelor">Bachelor</option>
+                <option value="married">Married</option>
+                <option value="any">Any</option>
               </select>
             </div>
 
@@ -309,7 +344,7 @@ const AddRoom = () => {
               />
               <p
                 style={
-                  type === "" || type.trim().length() < 100
+                  description.length < 100
                     ? { color: "red", display: "block" }
                     : { display: "none" }
                 }
@@ -323,13 +358,13 @@ const AddRoom = () => {
               <label>For Tenants to contact:</label>
               <hr></hr>
               <div>
-                <label className="" for="mailId">
-                  E-Mail
+                <label className="" for="emailId">
+                  Email
                 </label>
                 <input
-                  id="mailId"
+                  id="emailId"
                   type="email"
-                  placeholder="Email"
+                  placeholder="E-Mail Address"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -341,7 +376,7 @@ const AddRoom = () => {
                 </label>
                 <input
                   id="phoneId"
-                  type="phone"
+                  type="number"
                   placeholder="Phone/Mobile Number"
                   value={contactPhone}
                   onChange={(e) => setContactPhone(e.target.value)}
@@ -362,13 +397,12 @@ const AddRoom = () => {
               <input
                 id="imageId"
                 type="file"
-                name="MainPic"
-                value={mainPic}
-                onChange={(e) => setmainPic(e.target.value)}
+                name="image"
+                onChange={(e) => setImage(e.target.files[0])}
               />
               <p
                 style={
-                  mainPic === ""
+                  image === ""
                     ? { color: "red", display: "block" }
                     : { display: "none" }
                 }

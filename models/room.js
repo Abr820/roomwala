@@ -36,13 +36,13 @@ const roomSchema = new mongoose.Schema({
     },
     country:{
         type:String,
-        default:''
+        default:'India'
     },
     zip:{
         type:String,
         minlength:[6,'zip must have 6 digits'],
         maxlength:[6,'zip must have 6 digits'],
-        validate:validator.isNumeric
+        //validate:validator.isNumeric
     },
     utilitiesInc:{
         type:Boolean,
@@ -51,7 +51,22 @@ const roomSchema = new mongoose.Schema({
     rent:{
         type:Number,
         required:[true,'rent per month must be mentioned'],
-        validate:validator.isNumeric
+        //validate:validator.isNumeric
+    },
+    gender:{
+        type:String,
+        enum:{
+            values:['male','female','any'],
+            message:'Please, select between MALE or FEMALE or OTHERS',
+        }
+        
+    },
+    maritalStatus:{
+        type:String,
+        enum: {
+            values:['bachelor','married','any'],
+            message: 'Please, select between BACHELOR / MARRIED / any'
+        }   
     },
     createDate:{
         type: Date,

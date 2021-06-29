@@ -5,6 +5,7 @@ const PORT = 5000
 const {MONGOURI} = require('./keys')
 
 require('../models/user')
+require('../models/room')
 
 
 
@@ -34,6 +35,8 @@ App.use(express.urlencoded({extended: true}))
 App.use(require('../routes/signup'))
 App.use(require('../routes/login'))
 App.use(require('../routes/myprofile'))
+App.use(require('../routes/addroom'))
+App.use(require('../routes/showroom'))
 
 App.get('/',middleWare,(req,res)=>{
   res.send("hello world")
@@ -43,7 +46,7 @@ App.get('/about',(req,res)=>{
   res.send("This is about page")
 })
 
-App.use((req,res,err) => console.log("chinmaya chiranjib"))
+// App.use((req,res,err) => console.log("chinmaya chiranjib"))
 App.listen(PORT,()=>{
   console.log("server is running on the port:",PORT)
 })
