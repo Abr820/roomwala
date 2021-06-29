@@ -7,7 +7,7 @@ const validator = require('validator')
 const requiredlogin = require("../auths/requiredLogin")
 
 router.post('/addroom',requiredlogin,(req,res)=>{
-    console.log(req.body,"signup auth executed")
+    //console.log(req.body,"add room code executed")
     const { type,
             imageUrl,
             contactPhone,
@@ -20,7 +20,8 @@ router.post('/addroom',requiredlogin,(req,res)=>{
             zip,
             utilitiesInc,
             rent,
-            description} = req.body
+            description,
+            email} = req.body
     // if(type==="" || address==="" || city==="" || zip==="" || rent===""){
     //     return res.status(422).json({error:"Please fill up all the required fields."})
     // }
@@ -32,10 +33,17 @@ router.post('/addroom',requiredlogin,(req,res)=>{
         if(!validator.isNumeric(contactPhone)){
             return res.status(422).json({error:"Kindly use a valid phone number."})
         }
-        contact=contactPhone
+        contact = contactPhone
     }
     else{
         contact = req.user.phone
+    }
+
+    if(!email){
+        userEmail = req.user.email
+    }
+    else{
+        userEmail = email
     }
 
     var boolUtilitiesInc = (utilitiesInc == 'true') || (utilitiesInc == 'True') || (utilitiesInc == 'TRUE')
@@ -59,11 +67,12 @@ router.post('/addroom',requiredlogin,(req,res)=>{
         utilitiesInc:boolUtilitiesInc,
         rent:intRent,
         description,
-        owner:req.user
+        owner:req.user,
+        email:userEmail
     })
     room.save()
     .then(room=>{
-        console.log(room)
+        //console.log(room)
         res.json({message:"saved successfully"})
     })
     .catch(err=>{

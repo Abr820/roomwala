@@ -19,4 +19,16 @@ router.get("/allroom",(req,res) => {
         })
 })
 
+router.get("/myroom",requiredlogin,(req,res) => {
+    //console.log(req)
+    Room.find({ owner: req.user})
+        .then(rooms => {
+            //console.log(rooms)
+            res.json({rooms})      
+        })
+        .catch(err => {
+            console.log(err);
+        })
+})
+
 module.exports = router
