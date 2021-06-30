@@ -6,7 +6,7 @@ import AlgoliaPlaces from "algolia-places-react";
 function Home(props) {
   const [citySelected, setCitySelected] = useState("");
   const { handleSubmit } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => console.log(citySelected);
   return (
     <>
       <div className="container home-left">
@@ -44,7 +44,7 @@ function Home(props) {
                     let state = suggestion.hasOwnProperty("administrative")
                       ? suggestion.administrative
                       : suggestion.hit.administrative[0];
-                    setCitySelected(`${suggestion.name}, ${state}`);
+                    setCitySelected(`${suggestion.name}`);
                   }}
                   onError={({ message }) =>
                     console.log("Sorry, error with the API! ❌")

@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect , useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import ShowRoom from "./Showroom";
+import { UserContext } from "../../App";
 
 const AllRooms = () => {
   const [data, setData] = useState([]);
   const history = useHistory();
+  const { state, dispatch } = useContext(UserContext);
   useEffect(() => {
     fetch("/allroom", {
       headers: {
@@ -72,20 +74,23 @@ const AllRooms = () => {
                       Available For {room.gender} !
                     </h5>
                   </div>
+                  
                   <div class="card-action">
+                  {state &&
                     <button className="btn-flat orange waves-effect waves-light">
                       <i class="material-icons left">hotel</i>
                       <Link
                         className="link"
                         to={{
                           pathname: "/showroom",
-                          search: "?query=abc",
+                          search: `?query=${room._id}`,
                           state: { detail: room._id },
                         }}
                       >
                         Show Room Details!
                       </Link>
                     </button>
+                  }
                     {/* <h6 onClick={() => show(room._id)}>SHOW DETAILS</h6> */}
                   </div>
                 </div>

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
+
 const ShowRoom = (props) => {
   //console.log("In the showroom ")
   const [data, setData] = useState([]);
+  
   const location = useLocation();
 
   useEffect(() => {
@@ -16,8 +18,11 @@ const ShowRoom = (props) => {
       .then((res) => res.json())
       .then((result) => {
         console.log(result);
-        setData(result.room);
-      });
+        setData(result.room)
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }, [location]);
 
   return (
@@ -41,7 +46,7 @@ const ShowRoom = (props) => {
             <div class="card-content">
               {/* <h5>💷Rent: ₹{data.rent}</h5> */}
               <div className="room-type2 center">
-                <h5>💷Rent : ₹{data.rent}</h5>
+                <h5>💷Rent : ₹{data.rent}/Month</h5>
               </div>
               <br />
               <div className="room-type center">

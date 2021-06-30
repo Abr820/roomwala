@@ -16,6 +16,7 @@ router.get("/allroom",(req,res) => {
         })
         .catch(err => {
             console.log(err);
+            res.status(422).send()
         })
 })
 
@@ -28,6 +29,7 @@ router.get("/room/:roomid",requiredlogin,(req,res) => {
         })
         .catch(err => {
             console.log(err);
+            res.status(422).send()
         })
 })
 
@@ -40,6 +42,7 @@ router.get("/myroom",requiredlogin,(req,res) => {
         })
         .catch(err => {
             console.log(err);
+            res.status(422).send()
         })
 })
 

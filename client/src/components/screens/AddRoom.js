@@ -3,6 +3,7 @@ import {Link,useHistory} from "react-router-dom"
 import { useForm } from 'react-hook-form'
 import M from "materialize-css"
 import "../../App.css"
+import AlgoliaPlaces from "algolia-places-react";
 
 const AddRoom = () => {
   const err = {
@@ -66,6 +67,8 @@ const AddRoom = () => {
         if(type === "" || image === "" || address === "" || city === "" || state === "" || !(zip.valueOf()>=100000 && zip.valueOf()<=999999) || utilitiesInc === "" || rent === "" || rent.charAt(0) === 'e' || description.trim().length<100 || maritalStatus === "" || gender === ""){
             return M.toast({html: "Fill the required boxes correctly",classes: "#d32f2f red darken-2"})
         }
+
+        console.log(city)
         
         const imageUrl = await postDetails() 
         setmainPic(imageUrl)
@@ -248,14 +251,28 @@ const AddRoom = () => {
               <label className="" for="cityId">
                 City
               </label>
-              <input
-                id="cityId"
-                type="text"
-                placeholder="City"
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-              />
-              <p
+              <AlgoliaPlaces
+                  placeholder="Enter a City"
+                  options={{
+                    appId: process.env.REACT_APP_APP,
+                    apiKey: process.env.REACT_APP_APPK,
+                    // language: "sv",
+                    countries: ["in"],
+                    type: "city",
+                    // Other options from https://community.algolia.com/places/documentation.html#options
+                  }}
+                  onChange={({ suggestion }) => {
+                    let state = suggestion.hasOwnProperty("administrative")
+                      ? suggestion.administrative
+                      : suggestion.hit.administrative[0];
+                    setCity(`${suggestion.name}`);
+                    setState(`${state}`)
+                  }}
+                  onError={({ message }) =>
+                    console.log("Sorry, error with the API! ❌")
+                  }
+                />
+                <p
                 style={
                   city === ""
                     ? { color: "red", display: "block" }
