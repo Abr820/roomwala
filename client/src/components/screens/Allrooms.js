@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link , useHistory } from "react-router-dom";
+import ShowRoom from "./Showroom"
 
 const AllRooms = () => {
   const [data, setData] = useState([]);
+  const history = useHistory();
   useEffect(() => {
     fetch("/allroom", {
       headers: {
@@ -16,18 +18,26 @@ const AllRooms = () => {
       });
   }, []);
 
+  // const show = (roomid) => {
+  //   console.log("Call begin ",roomid)
+  //   history.push({
+  //     pathname: "/showroom",
+  //     state: {detail : {roomid}}
+  //   })
+  // } 
+
   return (
     <div className="container">
       <div className="section ">
         <div class="card-panel yellow darken-3 allrooms-panel">
           <h4 className="center-align ">
             Searching rooms in:
-            <span style={{ color: "red" }}> Everywhere!🌏</span>
+            <span style={{ color: "red" }}> Everywhere!🌍</span>
           </h4>
         </div>
         {/* <br />
         <br /> */}
-        <div class="row">
+        <div key="3" class="row">
           {/**************************************single-card***************************** */}
           {data.map((room) => {
             return (
@@ -65,9 +75,14 @@ const AllRooms = () => {
                   <div class="card-action">
                     {/* <a href="#">This is a link</a> */}
 
-                    <Link className="link blue-text" to="/showroom">
+                    <Link className="link blue-text" to={{
+                      pathname: "/showroom",
+                      search: "?query=abc",
+                      state: {detail: room._id}
+                    }}>
                       Show Details!
                     </Link>
+                    {/* <h6 onClick={() => show(room._id)}>SHOW DETAILS</h6> */}
                   </div>
                 </div>
               </div>
