@@ -5,7 +5,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
 /* allrooms */
 @import url("https://fonts.googleapis.com/css2?family=Cabin&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Jomhuria&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Jomhuria&display=swap");
 a {
   color: black !important;
 }
@@ -108,7 +108,6 @@ label {
   border: 4px dashed black; */
 }
 
-
 .addroom-form {
   padding: 50px;
   margin: 20px;
@@ -121,6 +120,16 @@ label {
 .showroom-panel {
   font-family: "Rammetto One", cursive;
 }
+.room-type2 {
+  border: 4px solid orange;
+  color: white;
+  font-family: "Cabin", sans-serif;
+  margin: 2px;
+  padding: 10px;
+  background-color: #ff4500;
+  border-radius: 20px;
+}
+
 /* *******************allroom**************************************** */
 .allrooms-panel {
   font-family: "Rammetto One", cursive;
@@ -162,8 +171,8 @@ label {
   /* padding: 5px; */
   /* background-color: orange; */
 }
-.room-city1{
-  font-family: 'Jomhuria', cursive;
+.room-city1 {
+  font-family: "Jomhuria", cursive;
   font-size: 35px;
 }
 .room-city h5 {

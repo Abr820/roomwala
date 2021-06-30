@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Link , useHistory } from "react-router-dom";
-import ShowRoom from "./Showroom"
+import { Link, useHistory } from "react-router-dom";
+import ShowRoom from "./Showroom";
 
 const AllRooms = () => {
   const [data, setData] = useState([]);
@@ -24,7 +24,7 @@ const AllRooms = () => {
   //     pathname: "/showroom",
   //     state: {detail : {roomid}}
   //   })
-  // } 
+  // }
 
   return (
     <div className="container">
@@ -73,15 +73,19 @@ const AllRooms = () => {
                     </h5>
                   </div>
                   <div class="card-action">
-                    {/* <a href="#">This is a link</a> */}
-
-                    <Link className="link blue-text" to={{
-                      pathname: "/showroom",
-                      search: "?query=abc",
-                      state: {detail: room._id}
-                    }}>
-                      Show Details!
-                    </Link>
+                    <button className="btn-flat orange waves-effect waves-light">
+                      <i class="material-icons left">hotel</i>
+                      <Link
+                        className="link"
+                        to={{
+                          pathname: "/showroom",
+                          search: "?query=abc",
+                          state: { detail: room._id },
+                        }}
+                      >
+                        Show Room Details!
+                      </Link>
+                    </button>
                     {/* <h6 onClick={() => show(room._id)}>SHOW DETAILS</h6> */}
                   </div>
                 </div>
