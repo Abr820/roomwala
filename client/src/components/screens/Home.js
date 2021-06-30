@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import AlgoliaPlaces from "algolia-places-react";
+import "../../App.css"
 
 function Home(props) {
   const [citySelected, setCitySelected] = useState("");
@@ -51,12 +52,25 @@ function Home(props) {
                   }
                 />
 
-                <input
+                {/* <input
                   className="waves-effect btn-large purple accent-3 pulse"
                   // className="mt-4 sm:mt-0 bg-themeYellow mx-1 px-3 py-1 lg:ml-6 lg:text-2xl rounded-lg text-xl text-gray-800 focus:outline-none focus:shadow-outline shadow"
                   type="submit"
                   value="Search"
-                />
+                /> */}
+                <button type="submit" className="waves-effect btn-large purple accent-3 pulse">
+                      {/* <i class="material-icons left">hotel</i> */}
+                      <Link
+                        className="link"
+                        to={{
+                          pathname: "/city",
+                          search: `?query=${citySelected}`,
+                          state: { detail: citySelected },
+                        }}
+                      >
+                        Search
+                      </Link>
+                    </button>
               </form>
             </div>
             <div className="allroom-link">

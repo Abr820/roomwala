@@ -9,6 +9,7 @@ import SignUp from "./components/screens/Signup";
 import AddRoom from "./components/screens/AddRoom";
 import AllRooms from "./components/screens/Allrooms";
 import ShowRoom from "./components/screens/Showroom";
+import CityRooms from "./components/screens/Cityrooms"
 
 //import CreatePost from "./components/screens/createPost"
 import { reducer, initialState } from "./reducer/userReducers";
@@ -55,6 +56,9 @@ const Routing = () => {
       </Route>
       <Route path="/showroom">
         <ShowRoom />
+      </Route>
+      <Route path="/city">
+        <CityRooms />
       </Route>
       {/* <Route path="/create">
             <CreatePost />

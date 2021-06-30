@@ -7,7 +7,7 @@ const validator = require('validator')
 const requiredlogin = require("../auths/requiredLogin")
 
 router.get("/allroom",(req,res) => {
-    Room.find(
+    Room.find({},
         ['_id','rent','city','state','type','mainPic','gender'],
         {
             sort:{
@@ -59,11 +59,11 @@ router.get("/myroom",requiredlogin,(req,res) => {
         })
 })
 
-router.get("/cityroom",(req,res) => {
-    console.log("param is:" ,req.params)
+router.get("/city/:cityname",(req,res) => {
+    console.log("param is:" ,req.params.cityname)
     // Find First 10 News Items
     Room.find({
-        city: "birbhum"//req.params.city // Search Filters
+        city: req.params.cityname//req.params.city // Search Filters
     },
     ['_id','rent','city','state','type','mainPic','gender'], // Columns to Return, default all columns
     {
@@ -74,7 +74,7 @@ router.get("/cityroom",(req,res) => {
         }
     })
     .then(rooms => {
-        //console.log(rooms)
+        console.log(rooms)
         res.json({rooms})      
     })
     .catch(err => {
