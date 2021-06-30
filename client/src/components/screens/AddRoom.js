@@ -85,6 +85,7 @@ const AddRoom = () => {
                 address,
                 city,
                 state,
+                zip,
                 description,
                 rent,
                 email,

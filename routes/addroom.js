@@ -28,7 +28,7 @@ router.post('/addroom',requiredlogin,(req,res)=>{
     // if(imageUrl===""){
     //     return res.status(422).json({error:"Please add an Image of your room."})
     // }
-    var contact
+    let contact
     if(contactPhone!==""){
         if(!validator.isNumeric(contactPhone)){
             return res.status(422).json({error:"Kindly use a valid phone number."})
@@ -39,6 +39,7 @@ router.post('/addroom',requiredlogin,(req,res)=>{
         contact = req.user.phone
     }
 
+    let userEmail
     if(!email){
         userEmail = req.user.email
     }

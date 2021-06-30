@@ -11,6 +11,10 @@ const roomSchema = new mongoose.Schema({
         },
         default:'private'
     },
+    email:{
+        type:String,
+        validate:[validator.isEmail,'Please provide a valid email id']
+    },
     mainPic:{
         type:String,
         required:[true, 'Please give a picture for users.'],
