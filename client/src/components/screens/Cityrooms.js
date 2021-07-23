@@ -1,4 +1,4 @@
-import React, { useState, useEffect , useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import ShowRoom from "./Showroom";
 import { UserContext } from "../../App";
@@ -10,20 +10,20 @@ const CityRooms = (props) => {
   const { state, dispatch } = useContext(UserContext);
   const location = useLocation();
   useEffect(() => {
-      console.log(location)
-      fetch(`/city/${location.state.detail}`, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("jwt"),
-        },
+    console.log(location);
+    fetch(`/city/${location.state.detail}`, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+        setData(result.rooms);
       })
-        .then((res) => res.json())
-        .then((result) => {
-          console.log(result);
-          setData(result.rooms)
-        })
-        .catch((err) => {
-          console.log(err);
-        })
+      .catch((err) => {
+        console.log(err);
+      });
   }, [location]);
 
   // const show = (roomid) => {
@@ -80,23 +80,23 @@ const CityRooms = (props) => {
                       Available For {room.gender} !
                     </h5>
                   </div>
-                  
+
                   <div class="card-action">
-                  {state &&
-                    <button className="btn-flat orange waves-effect waves-light">
-                      <i class="material-icons left">hotel</i>
-                      <Link
-                        className="link"
-                        to={{
-                          pathname: "/showroom",
-                          search: `?query=${room._id}`,
-                          state: { detail: room._id },
-                        }}
-                      >
-                        Show Room Details!
-                      </Link>
-                    </button>
-                  }
+                    {state && (
+                      <button className="btn-flat orange waves-effect waves-light">
+                        <i class="material-icons left">hotel</i>
+                        <Link
+                          className="link"
+                          to={{
+                            pathname: "/showroom",
+                            search: `?query=${room._id}`,
+                            state: { detail: room._id },
+                          }}
+                        >
+                          Show Room Details!
+                        </Link>
+                      </button>
+                    )}
                     {/* <h6 onClick={() => show(room._id)}>SHOW DETAILS</h6> */}
                   </div>
                 </div>
@@ -106,6 +106,24 @@ const CityRooms = (props) => {
           {/* *******************************************card-ending *******************************************/}
         </div>
       </div>
+      <footer class="page-footer page transparent">
+        <div class="container">
+          <div>
+            <div class="pagination">
+              <div class="leftarrow left">
+                <a href="#!">
+                  <i class="material-icons medium">chevron_left</i>
+                </a>
+              </div>
+              <div className="rightarrow right">
+                <a href="#!">
+                  <i class="material-icons medium">chevron_right</i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
