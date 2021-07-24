@@ -179,6 +179,24 @@ label {
   text-transform: capitalize;
 }
 
+/* **************************allrooms-pagination************************ */
+.leftarrow {
+  background-color: orange !important;
+}
+.rightarrow {
+  background-color: orange !important;
+}
+
+.page{
+  position: fixed;
+  height: 90px;
+  /* background-color: red; */
+  bottom: 0px;
+  left: -80px;
+  right: -80px;
+  margin-bottom: 0px;
+}
+
 /************** profile ************************************/
 .profile-container {
   background: #9796f0; /* fallback for old browsers */

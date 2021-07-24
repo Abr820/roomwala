@@ -9,49 +9,69 @@ const CityRooms = (props) => {
   const history = useHistory();
   const { state, dispatch } = useContext(UserContext);
   const location = useLocation();
+  const [page, setPage] = useState(0);
+  const [pageMax,setPageMax] = useState(0);
+
   useEffect(() => {
-      console.log(location)
-      fetch(`/city/${location.state.detail}`, {
+    fetch(`/citycount/${location.state.detail}`, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+    })
+      .then((res) => res.json())
+      .then(async (count) => {
+        console.log({count})
+        await setPageMax(count-1)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, [])
+
+  useEffect(() => {
+      fetch(`/city/${location.state.detail}/${page}`, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("jwt"),
         },
       })
         .then((res) => res.json())
         .then((result) => {
-          console.log(result);
           setData(result.rooms)
         })
         .catch((err) => {
           console.log(err);
         })
-  }, [location]);
+  }, [location,page]);
 
-  // const show = (roomid) => {
-  //   console.log("Call begin ",roomid)
-  //   history.push({
-  //     pathname: "/showroom",
-  //     state: {detail : {roomid}}
-  //   })
-  // }
+  const left = async() => {
+    if(page > 0) {
+      await setPage(page - 1)
+    }
+  }
+
+  const right = async() => {
+    if(page < pageMax) {
+      await setPage(page + 1)
+    }  
+  }
+
 
   return (
     <div className="container">
       <div className="section ">
-        <div class="card-panel yellow darken-3 allrooms-panel">
+        <div className="card-panel yellow darken-3 allrooms-panel">
           <h4 className="center-align ">
             Searching rooms in:
             <span style={{ color: "red" }}> {location.state.detail}</span>
           </h4>
         </div>
-        {/* <br />
-        <br /> */}
-        <div key="3" class="row">
+        <div key="3" className="row">
           {/**************************************single-card***************************** */}
           {data.map((room) => {
             return (
-              <div class="col s12 m4">
-                <div class="allroom-card card hoverable yellow accent-2">
-                  <div class="card-image  waves-effect waves-block waves-light">
+              <div className="col s12 m4">
+                <div className="allroom-card card hoverable yellow accent-2">
+                  <div className="card-image  waves-effect waves-block waves-light">
                     <img
                       src={
                         room.mainPic !== "default path"
@@ -60,11 +80,11 @@ const CityRooms = (props) => {
                       }
                       alt="roompic"
                     />
-                    <div class="card-rent card-title">
+                    <div className="card-rent card-title">
                       <h5>₹{room.rent}/Month</h5>
                     </div>
                   </div>
-                  <div class="card-content">
+                  <div className="card-content">
                     <div className="room-type center">
                       <strong>{room.type}</strong>
                     </div>
@@ -81,10 +101,10 @@ const CityRooms = (props) => {
                     </h5>
                   </div>
                   
-                  <div class="card-action">
+                  <div className="card-action">
                   {state &&
                     <button className="btn-flat orange waves-effect waves-light">
-                      <i class="material-icons left">hotel</i>
+                      <i className="material-icons left">hotel</i>
                       <Link
                         className="link"
                         to={{
@@ -106,6 +126,22 @@ const CityRooms = (props) => {
           {/* *******************************************card-ending *******************************************/}
         </div>
       </div>
+
+      {/* *******************************************footer *******************************************/}
+      <footer className="page-footer page transparent">
+          <div className="container">
+            <div>
+              <div className="pagination">
+                <div className="leftarrow left" onClick={left}>
+                    <i className="material-icons medium">chevron_left</i>
+                </div>
+                <div className="rightarrow right" onClick={right}>
+                    <i className="material-icons medium">chevron_right</i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </footer>
     </div>
   );
 };
