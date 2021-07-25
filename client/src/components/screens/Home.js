@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import AlgoliaPlaces from "algolia-places-react";
-import "../../App.css"
+import "../../App.css";
 
 function Home(props) {
   const [citySelected, setCitySelected] = useState("");
@@ -58,19 +58,22 @@ function Home(props) {
                   type="submit"
                   value="Search"
                 /> */}
-                <button type="submit" className="waves-effect btn-large purple accent-3 pulse">
-                      {/* <i class="material-icons left">hotel</i> */}
-                      <Link
-                        className="link"
-                        to={{
-                          pathname: "/city",
-                          search: `?query=${citySelected}`,
-                          state: { detail: citySelected },
-                        }}
-                      >
-                        Search
-                      </Link>
-                    </button>
+                <button
+                  type="submit"
+                  className="waves-effect btn-large purple accent-3 pulse"
+                >
+                  {/* <i class="material-icons left">hotel</i> */}
+                  <Link
+                    className="link"
+                    to={{
+                      pathname: "/city",
+                      search: `?query=${citySelected}`,
+                      state: { detail: citySelected },
+                    }}
+                  >
+                    Search
+                  </Link>
+                </button>
               </form>
             </div>
             <div className="allroom-link">
@@ -258,11 +261,8 @@ function Home(props) {
         <div className="footer-copyright">
           <div className="container">
             Made by{" "}
-            <a
-              className="orange-text text-lighten-3"
-              href="http://materializecss.com"
-            >
-              Materialize
+            <a className="orange-text text-lighten-5" href="#">
+              Chinmaya, Himanshu, Abrar
             </a>
           </div>
         </div>
